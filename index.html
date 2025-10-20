@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <nav class="px-4 md:px-12 py-4 shadow-2xl bg-white sticky top-0 z-50 bg-white shadow-md bg-white/20 shadow-lg ring-1 ring-black/2">
+        <div class="flex justify-between items-center">
+            <!-- Logo -->
+            <div class="border-4 border-transparent">
+                <a href="#">
+                    <img src="/assets/Ciclismo_Logo.svg" alt="Logo Ciclismo" class="w-16">
+                </a>
+            </div>
+            
+            <!-- Menú para escritorio -->
+            <ul class="hidden md:flex flex-row justify-between items-center space-x-6">
+                <li><a href="#" class="hover:text-green-500 transition-colors">Ropa</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors">Partes</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors">Accesorios</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors">MTB</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors">Ruta</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors">Contactanos</a></li>
+            </ul>
+            
+            <!-- Botones de usuario para escritorio -->
+            <div class="hidden md:flex flex-row justify-between gap-4">
+                <a href="#" class="hover:text-green-500 transition-colors">Registrarse</a>
+                <a href="#" class="hover:text-green-500 transition-colors">Iniciar Sesión</a>
+            </div>
+            
+            <!-- Botón del menú hamburguesa para móvil -->
+            <button id="mobile-menu-button" class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Menú móvil (oculto por defecto) -->
+        <div id="mobile-menu" class="mobile-menu md:hidden mt-4 hidden">
+            <ul class="flex flex-col space-y-4">
+                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Ropa</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Partes</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Accesorios</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">MTB</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Ruta</a></li>
+                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Contactanos</a></li>
+                <li class="pt-4 border-t border-gray-200">
+                    <a href="#" class="hover:text-green-500 transition-colors block py-2">Registrarse</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:text-green-500 transition-colors block py-2">Iniciar Sesión</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <section class = "items-center">
+        <h1>SECTION HERO</h1>
+    </section>
+
+    <main>
+        <section class="bg-gray-100 py-8">
+    <h1 class="xl:px-8 mx-8 mb-8">
+        <span class="text-3xl block special-gothic-expanded-one-600">Ropa para Ciclismo</span>
+        <a href="/camisetas.html" class="text-md font-semibold border-black inline-block hover:border-b-1">Ver más</a>
+    </h1>
+    
+    <!-- Contenedor Carrousel Ropa - USANDO EL MISMO SISTEMA DEL PRIMER EJEMPLO -->
+    <div class="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 xl:mx-12 xl:my-0 mx-4 py-2
+                md:grid md:grid-cols-2 md:gap-12
+                xl:grid-cols-4
+                justify-items-center">
+        
+        <!-- Producto 1 -->
+        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
+            <div class="bg-gray-200 rounded-2xl p-4">
+                <div class="flex justify-between items-center">
+                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Nuevo</span>
+                    <button class="text-red-500">♥️</button>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13" alt="Jersey Ciclismo" class="w-auto h-48 object-contain mx-auto">
+                </div>
+            </div>
+            <h3 class="text-gray-800 font-bold text-lg mt-4">Jersey Profesional</h3>
+            <p class="text-gray-500">$120.000</p>
+            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
+                Comprar
+            </button>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
+            <div class="bg-gray-200 rounded-2xl p-4">
+                <div class="flex justify-between items-center">
+                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Más Vendida</span>
+                    <button class="text-red-500">♥️</button>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d" alt="Culote Ciclismo" class="w-auto h-48 object-contain mx-auto">
+                </div>
+            </div>
+            <h3 class="text-gray-800 font-bold text-lg mt-4">Culote Aerodinámico</h3>
+            <p class="text-gray-500">$95.000</p>
+            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
+                Comprar
+            </button>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
+            <div class="bg-gray-200 rounded-2xl p-4">
+                <div class="flex justify-between items-center">
+                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Oferta</span>
+                    <button class="text-red-500">♥️</button>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1546691469-2f13ec136a48" alt="Chaqueta Ciclismo" class="w-auto h-48 object-contain mx-auto">
+                </div>
+            </div>
+            <h3 class="text-gray-800 font-bold text-lg mt-4">Chaqueta Impermeable</h3>
+            <p class="text-gray-500">$150.000</p>
+            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
+                Comprar
+            </button>
+        </div>
+
+        <!-- Producto 4 -->
+        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
+            <div class="bg-gray-200 rounded-2xl p-4">
+                <div class="flex justify-between items-center">
+                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Nuevo</span>
+                    <button class="text-red-500">♥️</button>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f" alt="Guantes Ciclismo" class="w-auto h-48 object-contain mx-auto">
+                </div>
+            </div>
+            <h3 class="text-gray-800 font-bold text-lg mt-4">Guantes Profesionales</h3>
+            <p class="text-gray-500">$65.000</p>
+            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
+                Comprar
+            </button>
+        </div>
+
+        <!-- Producto 5 -->
+        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
+            <div class="bg-gray-200 rounded-2xl p-4">
+                <div class="flex justify-between items-center">
+                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Popular</span>
+                    <button class="text-red-500">♥️</button>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa" alt="Zapatillas Ciclismo" class="w-auto h-48 object-contain mx-auto">
+                </div>
+            </div>
+            <h3 class="text-gray-800 font-bold text-lg mt-4">Zapatillas Carbon</h3>
+            <p class="text-gray-500">$280.000</p>
+            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
+                Comprar
+            </button>
+        </div>
+    </div>
+</section>
+    </main>
+
+    <footer>
+        <div></div>
+    </footer>
+
+        <script>
+            // JavaScript para controlar el menú móvil
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        </script>
+    </body>
+</html>
