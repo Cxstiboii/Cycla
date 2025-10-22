@@ -3,184 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Document</title>
+    <style>
+        .special-gothic-expanded-one-600 {
+            font-family: "Special Gothic Expanded One", sans-serif;
+            font-weight: 550;
+            font-style: normal;
+        }
+
+        @keyframes fade-in-up {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+          
+          .animate-fade-in-up {
+            animation: fade-in-up 1s ease-out forwards;
+          }
+          
+          .delay-200 { animation-delay: 0.2s; }
+          .delay-400 { animation-delay: 0.4s; }
+    </style>
 </head>
 <body>
-    
-    <!-- Navbar -->
-    <nav class="px-4 md:px-12 py-4 shadow-2xl bg-white sticky top-0 z-50 bg-white shadow-md bg-white/20 shadow-lg ring-1 ring-black/2">
-        <div class="flex justify-between items-center">
+
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white shadow-md bg-white/20 shadow-lg ring-1 ring-black/2 ">
+
+        <!-- NAV DESKTOP -->
+        <div class="hidden lg:flex items-center justify-between px-30 py-2">
             <!-- Logo -->
-            <div class="border-4 border-transparent">
+            <div class="flex-shrink-0">
                 <a href="#">
-                    <img src="/assets/Ciclismo_Logo.svg" alt="Logo Ciclismo" class="w-16">
+                    <img src="/assets/luvstar-logo.svg" alt="cycla" class="block w-40 h-auto">
                 </a>
             </div>
-            
-            <!-- Menú para escritorio -->
-            <ul class="hidden md:flex flex-row justify-between items-center space-x-6">
-                <li><a href="#" class="hover:text-green-500 transition-colors">Ropa</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors">Partes</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors">Accesorios</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors">MTB</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors">Ruta</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors">Contactanos</a></li>
-            </ul>
-            
-            <!-- Botones de usuario para escritorio -->
-            <div class="hidden md:flex flex-row justify-between gap-4">
-                <a href="#" class="hover:text-green-500 transition-colors">Registrarse</a>
-                <a href="#" class="hover:text-green-500 transition-colors">Iniciar Sesión</a>
-            </div>
-            
-            <!-- Botón del menú hamburguesa para móvil -->
-            <button id="mobile-menu-button" class="md:hidden text-2xl">
-                <i class="fas fa-bars"></i>
-            </button>
+
+            <div class="flex items-center justify-between gap-8"></div>
+                <a href="#" class="text-black font-extrabold hover:text-shadow-lg  special-gothic-expanded-one-600">Ropa de Ciclismo</a>
+                <a href="#" class="text-black font-extrabold hover:text-shadow-lg  special-gothic-expanded-one-600">Partes </a>
+                <a href="#" class="text-black font-extrabold hover:text-shadow-lg special-gothic-expanded-one-600">Ruta</a>
+                <a href="#" class="text-black font-extrabold hover:text-shadow-lg  special-gothic-expanded-one-600">MTB</a>
+                <a href="#" class="text-black font-extrabold hover:text-shadow-lg special-gothic-expanded-one-600">Iniciar Sesion</a>
+                <a href="#" class=" hover:text-shadow-lg  special-gothic-expanded-one-600">Registrarse</a>
         </div>
-        
-        <!-- Menú móvil (oculto por defecto) -->
-        <div id="mobile-menu" class="mobile-menu md:hidden mt-4 hidden">
-            <ul class="flex flex-col space-y-4">
-                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Ropa</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Partes</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Accesorios</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">MTB</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Ruta</a></li>
-                <li><a href="#" class="hover:text-green-500 transition-colors block py-2">Contactanos</a></li>
-                <li class="pt-4 border-t border-gray-200">
-                    <a href="#" class="hover:text-green-500 transition-colors block py-2">Registrarse</a>
-                </li>
-                <li>
-                    <a href="#" class="hover:text-green-500 transition-colors block py-2">Iniciar Sesión</a>
-                </li>
-            </ul>
+        </div>
+
+        <!-- NAV MOBILE -->
+        <div class="lg:hidden flex items-center justify-between px-10 py-4">
+            <!-- Logo -->
+            <a href="#">
+                <img src="/assets/luvstar-logo.svg" alt="logo-luvstar" class="w-40 h-auto">
+            </a>
+
+            <!-- Botón Hamburguesa -->
+            <div class="relative z-50">
+                <!-- Input oculto para controlar el menú -->
+                <input id="menu-checkbox" type="checkbox" class="peer hidden" />
+
+                <!-- Icono Hamburguesa -->
+                <label for="menu-checkbox" class="flex flex-col gap-1 cursor-pointer">
+                    <span class="block w-6 h-0.5 bg-black transition-all peer-checked:rotate-45 peer-checked:translate-y-1.5"></span>
+                    <span class="block w-6 h-0.5 bg-gray-800 transition-all peer-checked:opacity-0"></span>
+                    <span class="block w-6 h-0.5 bg-gray-800 transition-all peer-checked:-rotate-45 peer-checked:-translate-y-1.5"></span>
+                </label>
+
+                <!-- Sidebar -->
+                <ul
+                    class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg py-20 px-10 space-y-6 transform -translate-x-full transition-transform duration-700 ease-in-out peer-checked:translate-x-0">
+
+                    <!-- Logo -->
+                    <li class="my-6">
+                        <a href="#">
+                            <img src="/assets/luvstar-logo.svg" alt="logo-cycla" class="w-50 h-auto border-b-1">
+                        </a>
+                    </li>
+
+                    <li><a href="" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Ropa de Ciclismo</a></li>
+                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Partes</a></li>
+                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Ruta</a></li>
+                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">MTB</a></li>
+                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Iniciar sesion</a></li>
+                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Registrarse</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
+        <main>
 
-    <section class = "items-center">
-        <h1>SECTION HERO</h1>
-    </section>
-
-    <main>
-        <section class="bg-gray-100 py-8">
-    <h1 class="xl:px-8 mx-8 mb-8">
-        <span class="text-3xl block special-gothic-expanded-one-600">Ropa para Ciclismo</span>
-        <a href="/camisetas.html" class="text-md font-semibold border-black inline-block hover:border-b-1">Ver más</a>
-    </h1>
-    
-    <!-- Contenedor Carrousel Ropa - USANDO EL MISMO SISTEMA DEL PRIMER EJEMPLO -->
-    <div class="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 xl:mx-12 xl:my-0 mx-4 py-2
+            <!--Seccion Camisetas-->
+            <h1 class="xl:mx-14 mx-6 mt-20">
+                <span class="text-3xl block special-gothic-expanded-one-600 ">Ropa de Ciclismo</span>
+                <a href="/camisetas.html" class="text-md font-semibold  border-black inline-block hover:border-b-1">Ver más</a>
+            </h1>
+            <section class = "
+                flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 xl:mx-12 xl:my-0 mx-4 py-2
                 md:grid md:grid-cols-2 md:gap-12
                 xl:grid-cols-4
-                justify-items-center">
-        
-        <!-- Producto 1 -->
-        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
-            <div class="bg-gray-200 rounded-2xl p-4">
-                <div class="flex justify-between items-center">
-                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Nuevo</span>
-                    <button class="text-red-500">♥️</button>
-                </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13" alt="Jersey Ciclismo" class="w-auto h-48 object-contain mx-auto">
-                </div>
+                justify-items-center
+                ">
+                    <!--Objeto Uno-->
+                    <div class="snap-start flex-shrink-0 xl:w-auto w-max  max-w-sm rounded-2xl bg-white rounded-2xl border-gray-300 shadow-lg p-4 border-1  ">
+                        <div class = "bg-gray-200 rounded-2xl p-4">
+                            <!--Insginia y Corazon-->
+                            <div class = "flex justify-between items-center">
+                                <span class = "bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Mas Vendida</span>
+                                <button class = "">
+                                    ♥️
+                                </button>
+                            </div>
+                            <!--Imagen-->
+                            <div>
+                                <img src="/assets/Ropa de Ciclismo/Maillot_Manga_Corta.png" alt="Ropa" class = "w-auto h-auto object-contain">
+                            </div>
+                        </div>
+                        <!--Texto-->
+                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular">Maillot Profesional Manga Corta</h3>
+                        <p class="text-gray-500">$90.000</p>
+                        
+                        <button class = "w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
+                            Comprar
+                        </button>
+                    </div>
+                    
+                    <!--Objeto Dos-->
+                    <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white rounded-2xl border-gray-300 shadow-lg p-5 border-1 ">
+                        <!--Insginia y Corazon-->
+                        <div class = "bg-gray-200 rounded-2xl p-4">
+                            <div class = "bg-gray-200 flex justify-between items-center ">
+                                <span class = "bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Mas Vendida</span>
+                                <button class = "text-red-5500">
+                                    ♥️
+                                </button>
+                            </div>
+                            <!--Imagen-->
+                            <div>
+                                <img src="/assets/Ropa de Ciclismo/Chaqueta_impermeable.png" alt="Ropa 2" class = "w-auto h-auto object-contain">
+                            </div>
+                        </div>
+                        <!--Texto-->
+                        
+                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular">Chaqueta Impermeable</h3>
+                        <p class="text-gray-500">$90.000</p>
+                        
+                        <button class = "w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
+                            Comprar
+                        </button>
+                    </div>
+
+                    <!--Objeto Tres-->
+                    <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white rounded-2xl border-gray-300     shadow-lg p-5 border-1">
+                        <div class = "bg-gray-200 rounded-2xl p-4">
+                            <!--Insginia y Corazon-->
+                            <div class = "flex justify-between items-center">
+                                <span class = "bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Mas Vendida</span>
+                                <button class = "text-red-5500">
+                                    ♥️
+                                </button>
+                            </div>
+                            <!--Imagen-->
+                            <div>
+                                <img src="/assets/Camisetas/Camisa_Uno_Anverso-removebg-preview.png" alt="Ropa 3" class = "w-auto h-auto object-contain">
+                            </div>
+                        </div>
+                        <!--Texto-->
+                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular">Ropa 3</h3>
+                        <p class="text-gray-500">$90.000</p>
+                        <button class = "w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
+                            Comprar
+                        </button>
+                    </div>
+
+                    <!--Objeto Cuatro-->
+                    <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white rounded-2xl border-gray-300 shadow-lg p-5 border-1 ">
+                        <!--Insginia y Corazon-->
+                        <div class = "bg-gray-200 rounded-2xl p-4">
+                            <div class = "flex justify-between items-center">
+                                <span class = "bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Mas Vendida</span>
+                                <button class = "text-red-5500">
+                                    ♥️
+                                </button>
+                            </div>
+                            <!--Imagen-->
+                            <div>
+                                <img src="/assets/Camisetas/Camisa_Uno_Anverso-removebg-preview.png" alt="Ropa 4" class = "w-auto h-auto object-contain">
+                            </div>
+                        </div>
+                        <!--Texto-->
+                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular">Ropa 4</h3>
+                        <p class="text-gray-500">$90.000</p>
+                        
+                        <button class = "w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
+                            Comprar
+                        </button>
+                    </div>
+            </section>
+
+            <!--Seccion Pantalones-->
+            <section class = "grid grid-cols-5 gap-10 p-12 border-2 rounded-md border-black m-4">
+                <div class="col-start-1 col-end-2 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
+                <div class="col-start-2 col-end-3 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
+                <div class="col-start-3 col-end-4 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
+                <div class="col-start-4 col-end-5 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
+                <div class="col-start-5 col-end-6 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
+        </section>
+
+            <!--Seccion Hoodies-->
+            <section class = "grid grid-cols-5 gap-10 p-12 border-2 rounded-md border-black m-4">
+                <div class="col-start-1 col-end-2 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
+                <div class="col-start-2 col-end-3 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
+                <div class="col-start-3 col-end-4 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
+                <div class="col-start-4 col-end-5 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
+                <div class="col-start-5 col-end-6 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
+        </section>
+        </main>
+
+
+        <footer>
+            <div>
+                <h1>Contactanos</h1>
+                <a href="">About Us</a>
+                <a href="">Contact Us</a>
+                <a href="">Work With Us</a>
+                <p>Copyright 2025</p>
             </div>
-            <h3 class="text-gray-800 font-bold text-lg mt-4">Jersey Profesional</h3>
-            <p class="text-gray-500">$120.000</p>
-            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
-                Comprar
-            </button>
-        </div>
+        </footer>
+    
+</body>
 
-        <!-- Producto 2 -->
-        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
-            <div class="bg-gray-200 rounded-2xl p-4">
-                <div class="flex justify-between items-center">
-                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Más Vendida</span>
-                    <button class="text-red-500">♥️</button>
-                </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d" alt="Culote Ciclismo" class="w-auto h-48 object-contain mx-auto">
-                </div>
-            </div>
-            <h3 class="text-gray-800 font-bold text-lg mt-4">Culote Aerodinámico</h3>
-            <p class="text-gray-500">$95.000</p>
-            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
-                Comprar
-            </button>
-        </div>
+<script 
+    src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4">
+    
+    //Menu responsive para celulares
+    const toggleBtn = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
 
-        <!-- Producto 3 -->
-        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
-            <div class="bg-gray-200 rounded-2xl p-4">
-                <div class="flex justify-between items-center">
-                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Oferta</span>
-                    <button class="text-red-500">♥️</button>
-                </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1546691469-2f13ec136a48" alt="Chaqueta Ciclismo" class="w-auto h-48 object-contain mx-auto">
-                </div>
-            </div>
-            <h3 class="text-gray-800 font-bold text-lg mt-4">Chaqueta Impermeable</h3>
-            <p class="text-gray-500">$150.000</p>
-            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
-                Comprar
-            </button>
-        </div>
+    toggleBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+    });
 
-        <!-- Producto 4 -->
-        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
-            <div class="bg-gray-200 rounded-2xl p-4">
-                <div class="flex justify-between items-center">
-                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Nuevo</span>
-                    <button class="text-red-500">♥️</button>
-                </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f" alt="Guantes Ciclismo" class="w-auto h-48 object-contain mx-auto">
-                </div>
-            </div>
-            <h3 class="text-gray-800 font-bold text-lg mt-4">Guantes Profesionales</h3>
-            <p class="text-gray-500">$65.000</p>
-            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
-                Comprar
-            </button>
-        </div>
+    //Buscador
+    const btnBuscar = document.getElementById("btnBuscar");
+    const menuBuscar = document.getElementById("menuBuscar");
+    btnBuscar.addEventListener("click", (e) => {
+    e.preventDefault();
+    menuBuscar.classList.toggle("hidden");
+    });
 
-        <!-- Producto 5 -->
-        <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
-            <div class="bg-gray-200 rounded-2xl p-4">
-                <div class="flex justify-between items-center">
-                    <span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Popular</span>
-                    <button class="text-red-500">♥️</button>
-                </div>
-                <div>
-                    <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa" alt="Zapatillas Ciclismo" class="w-auto h-48 object-contain mx-auto">
-                </div>
-            </div>
-            <h3 class="text-gray-800 font-bold text-lg mt-4">Zapatillas Carbon</h3>
-            <p class="text-gray-500">$280.000</p>
-            <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
-                Comprar
-            </button>
-        </div>
-    </div>
-</section>
-    </main>
+  // Opcional: cerrar al hacer clic fuera
+    document.addEventListener("click", (e) => {
+    if (!btnBuscar.contains(e.target) && !menuBuscar.contains(e.target)) {
+        menuBuscar.classList.add("hidden");
+        }
+    });
+</script>
 
-    <footer>
-        <div></div>
-    </footer>
-
-        <script>
-            // JavaScript para controlar el menú móvil
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-        </script>
-    </body>
 </html>
