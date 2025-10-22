@@ -37,9 +37,22 @@ app.get('/api/productos', (req,res) => {
     FROM productos
   `;
 
-  connection.query(query(err,results)) => {
+  connection.query(query, (err,results) => {
     if (err){
-        console.log()
+        console.error('Error en la consulta', err);
+        res.status(500).json({error: 'Error del servidor'});
+        return;
     }
-  }
+    res.json(results);
+  });
+});
+
+//Ruta principal - sirve index.html
+
+app.get('/', (req,res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.listen(port, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${port}`);
 });
