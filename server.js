@@ -1,5 +1,5 @@
 const express = require('express');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const cors = require('cors');
 const path = require('path');
 
@@ -33,7 +33,7 @@ connection.connect((err) => {
 //Ruta para obtener los productos
 app.get('/api/productos', (req,res) => {
     const query = `
-    SELECT id, nombre_producto, cantidad, precio_unitario, fk_id_vendedor, fk_id_tipo_Producto, imagen_url 
+    SELECT all
     FROM productos
   `;
 
