@@ -1,60 +1,96 @@
 class ProductoRenderer {
     constructor(apiBase = 'http://localhost:3000/api') {
         this.apiBase = apiBase;
-
-        // ✅ Esto YA lo tienes - perfecto!
+        
+        //
         this.productosDestacados = {
             1: [1, 3, 4, 5],      // Ropa de Ciclismo
-            2: [10, 12, 18, 20],  // Partes de Ciclismo  
+            2: [13, 2, 10, 11],  // Partes de Ciclismo  
             3: [39, 40, 43, 44]   // Bicicletas
+        };
+
+
+        // 🆕 Mapa de imágenes por defecto como fallback
+        this.imagenesDefault = {
+            'Maillot Profesional Manga Corta': '/assets/Ropa de Ciclismo/Maillot_Manga_Corta.png',
+            'Chaqueta Impermeable': '/assets/Ropa de Ciclismo/Chaqueta_impermeable.png',
+            'Guantes de Ciclismo con Gel': '/assets/Ropa de Ciclismo/guantes-ejemplo.png',
+            
         };
     }
 
-    async cargarProductosCategoria(categoriaId = 1, limit = 4, containerId = 'productos-container') {
+    async cargarProductosCategoria(categoriaId = 1, limit = 12, containerId = 'productos-container') {
+    try {
+        console.log(`🔄 Cargando productos de categoría ${categoriaId}...`);
+        
+        const response = await fetch(`${this.apiBase}/productos/categoria/${categoriaId}`);
+        
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+        
+        const todosProductos = await response.json();
+        
+        console.log(`📦 Productos encontrados:`, 
+            todosProductos.map(p => ({ id: p.id, nombre: p.nombre_producto })));
+        
+        // 🆕 MOSTRAR TODOS los productos (hasta el límite)
+        const productosAMostrar = todosProductos.slice(0, limit);
+        
+        console.log(`✅ ${productosAMostrar.length} productos a mostrar:`, 
+            productosAMostrar.map(p => p.id));
+        
+        this.renderizarProductos(productosAMostrar, containerId);
+        return productosAMostrar;
+        
+    } catch (error) {
+        console.error('❌ Error cargando productos:', error);
+        await this.cargarProductosNormales(categoriaId, limit, containerId);
+        return [];
+    }
+}
+
+    // 🆕 MÉTODO MEJORADO: Fallback con IDs específicos
+    async cargarProductosNormales(categoriaId, limit, containerId) {
         try {
-            console.log(`🔄 Cargando productos destacados de categoría ${categoriaId}...`);
+            console.log(`🔄 Usando fallback para categoría ${categoriaId}...`);
             
-            // 🆕 CAMBIO: Quitar ?limit=${limit} para obtener TODOS
-            const response = await fetch(`${this.apiBase}/productos/categoria/${categoriaId}`);
-            
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
+            // Intentar cargar productos destacados por IDs específicos
+            const productosDestacadosIds = this.productosDestacados[categoriaId] || [];
+            if (productosDestacadosIds.length > 0) {
+                const productos = await this.cargarProductosPorIds(productosDestacadosIds);
+                if (productos.length > 0) {
+                    this.renderizarProductos(productos.slice(0, limit), containerId);
+                    return productos;
+                }
             }
             
-            const todosProductos = await response.json();
-            
-            // 🆕 CAMBIO: Filtrar por tus IDs destacados
-            const productosDestacadosIds = this.productosDestacados[categoriaId] || [];
-            const productosFiltrados = todosProductos.filter(producto => 
-                productosDestacadosIds.includes(producto.id)
-            ).slice(0, limit); // Limitar a 4 productos como tienes
-            
-            console.log(`✅ ${productosFiltrados.length} productos destacados cargados`);
-            
-            this.renderizarProductos(productosFiltrados, containerId);
-            return productosFiltrados;
+            // Si no funciona, cargar productos normales de la categoría
+            const response = await fetch(`${this.apiBase}/productos/categoria/${categoriaId}?limit=${limit}`);
+            const productos = await response.json();
+            this.renderizarProductos(productos, containerId);
+            return productos;
             
         } catch (error) {
-            console.error('❌ Error cargando productos:', error);
-            
-            // 🆕 CAMBIO: Usar fallback
-            await this.cargarProductosNormales(categoriaId, limit, containerId);
+            this.mostrarError(containerId);
             return [];
         }
     }
 
-    // 🆕 MÉTODO NUEVO: Fallback
-    async cargarProductosNormales(categoriaId, limit, containerId) {
+    // 🆕 MÉTODO: Cargar productos por IDs específicos
+    async cargarProductosPorIds(ids) {
         try {
-            const response = await fetch(`${this.apiBase}/productos/categoria/${categoriaId}?limit=${limit}`);
-            const productos = await response.json();
-            this.renderizarProductos(productos, containerId);
+            const response = await fetch(`${this.apiBase}/productos/ids?ids=${ids.join(',')}`);
+            if (response.ok) {
+                return await response.json();
+            }
+            return [];
         } catch (error) {
-            this.mostrarError(containerId);
+            console.error('Error cargando productos por IDs:', error);
+            return [];
         }
     }
 
-    // ✅ El resto de tus métodos se mantienen IGUAL
     renderizarProductos(productos, containerId) {
         const container = document.getElementById(containerId);
 
@@ -108,18 +144,20 @@ class ProductoRenderer {
     }
 
     obtenerImagenProducto(producto) {
-        if (producto.imagen_url) {
-            return `<img src="${producto.imagen_url}" alt="${producto.nombre_producto}" class="w-full h-48 object-contain" onerror="this.src='/assets/placeholder.jpg'">`;
-        }
-        
-        const imagenesMap = {
-            'Maillot Profesional Manga Corta': '/assets/Ropa de Ciclismo/Maillot_Manga_Corta.png',
-            'Chaqueta Impermeable': '/assets/Ropa de Ciclismo/Chaqueta_impermeable.png',
-            'Guantes de Ciclismo con Gel': '/assets/Ropa de Ciclismo/guantes-ejemplo.png',
-        };
-        
-        const imagen = imagenesMap[producto.nombre_producto] || '/assets/Camisetas/Camisa_Uno_Anverso-removebg-preview.png';
-        return `<img src="${imagen}" alt="${producto.nombre_producto}" class="w-full h-48 object-contain">`;
+    if (producto.imagen_url) {
+        return `
+        <img src="${producto.imagen_url}" alt="${producto.nombre_producto}" 
+        class="w-full h-48 object-contain"  // ← Cambié h-50 por h-48 para consistencia
+        onerror="this.src='${this.getImagenFallback(producto)}'">`;
+    }
+
+    const imagenDefault = this.getImagenFallback(producto);
+    return `
+    <img src="${imagenDefault}" alt="${producto.nombre_producto}"
+    class="w-full h-48 object-contain">`;
+}
+    getImagenFallback(producto){
+        return this.imagenesDefault[producto.nombre_producto] || '/assets/placeholder.jpg';
     }
 
     formatearPrecio(precio) {

@@ -3,57 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .special-gothic-expanded-one-600 {
-            font-family: "Special Gothic Expanded One", sans-serif;
-            font-weight: 550;
-            font-style: normal;
-        }
-
-        @keyframes fade-in-up {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-          }
-          
-          .animate-fade-in-up {
-            animation: fade-in-up 1s ease-out forwards;
-          }
-          
-          .delay-200 { animation-delay: 0.2s; }
-          .delay-400 { animation-delay: 0.4s; }
-
-
-        .producto {
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin: 15px;
-            border-radius: 10px;
-            text-align: center;
-            max-width: 300px;
-            display: inline-block;
-        }
-        .producto img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .sin-imagen {
-            width: 200px;
-            height: 200px;
-            background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-        }
-        .cargando {
-            text-align: center;
-            padding: 20px;
-            font-size: 18px;
-        }
-    </style>
+    <title>Cycla</title>
 </head>
 <body>
 
@@ -65,25 +15,121 @@
             <!-- Logo -->
             <div class="flex-shrink-0">
                 <a href="#">
-                    <img src="/assets/luvstar-logo.svg" alt="cycla" class="block w-40 h-auto">
+                    <img src="/assets/Cycla_Logo.svg" alt="cycla" class="block w-10 h-auto">
                 </a>
             </div>
 
             <div class="flex items-center justify-between gap-8"></div>
-                <a href="#" class="text-black font-extrabold hover:text-shadow-lg  special-gothic-expanded-one-600">Ropa de Ciclismo</a>
-                <a href="#" class="text-black font-extrabold hover:text-shadow-lg  special-gothic-expanded-one-600">Partes </a>
-                <a href="#" class="text-black font-extrabold hover:text-shadow-lg special-gothic-expanded-one-600">Ruta</a>
-                <a href="#" class="text-black font-extrabold hover:text-shadow-lg  special-gothic-expanded-one-600">MTB</a>
-                <a href="#" class="text-black font-extrabold hover:text-shadow-lg special-gothic-expanded-one-600">Iniciar Sesion</a>
-                <a href="#" class=" hover:text-shadow-lg  special-gothic-expanded-one-600">Registrarse</a>
+                <a href="#" class="text-black font-medium 
+                    special-gothic-expanded-one-600
+                    relative
+                    inline-block
+                    py-2
+                    transition-all duration-300
+                    hover:text-shadow-lg
+                    after:content-[''] 
+                    after:absolute 
+                    after:bottom-0 
+                    after:left-0 
+                    after:w-0 
+                    after:h-0.5 
+                    after:bg-black
+                    after:transition-all 
+                    after:duration-300
+                    hover:after:w-full">Ropa de Ciclismo</a>
+                <a href="#" class="text-black font-medium 
+                    special-gothic-expanded-one-600
+                    relative
+                    inline-block
+                    py-2
+                    transition-all duration-300
+                    hover:text-shadow-lg
+                    after:content-[''] 
+                    after:absolute 
+                    after:bottom-0 
+                    after:left-0 
+                    after:w-0 
+                    after:h-0.5 
+                    after:bg-black
+                    after:transition-all 
+                    after:duration-300
+                    hover:after:w-full">Partes </a>
+                <a href="#" class="text-black font-medium 
+                    special-gothic-expanded-one-600
+                    relative
+                    inline-block
+                    py-2
+                    transition-all duration-300
+                    hover:text-shadow-lg
+                    after:content-[''] 
+                    after:absolute 
+                    after:bottom-0 
+                    after:left-0 
+                    after:w-0 
+                    after:h-0.5 
+                    after:bg-black
+                    after:transition-all 
+                    after:duration-300
+                    hover:after:w-full">Ruta</a>
+                <a href="#" class="text-black font-medium 
+                    special-gothic-expanded-one-600
+                    relative
+                    inline-block
+                    py-2
+                    transition-all duration-300
+                    hover:text-shadow-lg
+                    after:content-[''] 
+                    after:absolute 
+                    after:bottom-0 
+                    after:left-0 
+                    after:w-0 
+                    after:h-0.5 
+                    after:bg-black
+                    after:transition-all 
+                    after:duration-300
+                    hover:after:w-full">MTB</a>
+                    <a href="#" class="text-black font-medium 
+                    special-gothic-expanded-one-600
+                    relative
+                    inline-block
+                    py-2
+                    transition-all duration-300
+                    hover:text-shadow-lg
+                    after:content-[''] 
+                    after:absolute 
+                    after:bottom-0 
+                    after:left-0 
+                    after:w-0 
+                    after:h-0.5 
+                    after:bg-black
+                    after:transition-all 
+                    after:duration-300
+                    hover:after:w-full">Iniciar Sesion</a>
+                <a href="#" class="text-black font-medium 
+                    special-gothic-expanded-one-600
+                    relative
+                    inline-block
+                    py-2
+                    transition-all duration-300
+                    hover:text-shadow-lg
+                    after:content-[''] 
+                    after:absolute 
+                    after:bottom-0 
+                    after:left-0 
+                    after:w-0 
+                    after:h-0.5 
+                    after:bg-black
+                    after:transition-all 
+                    after:duration-300
+                    hover:after:w-full">Registrarse</a>
         </div>
-        </div>
+        
 
         <!-- NAV MOBILE -->
         <div class="lg:hidden flex items-center justify-between px-10 py-4">
             <!-- Logo -->
             <a href="#">
-                <img src="/assets/luvstar-logo.svg" alt="logo-luvstar" class="w-40 h-auto">
+                <img src="/assets/Cycla_Logo.svg" alt="logo-Cycla" class="w-10 h-auto">
             </a>
 
             <!-- Botón Hamburguesa -->
@@ -105,33 +151,29 @@
                     <!-- Logo -->
                     <li class="my-6">
                         <a href="#">
-                            <img src="/assets/luvstar-logo.svg" alt="logo-cycla" class="w-50 h-auto border-b-1">
+                            <img src="/assets/Cycla_Logo.svg" alt="logo-cycla" class="w-10 h-auto border-b-1">
                         </a>
                     </li>
 
-                    <li><a href="" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Ropa de Ciclismo</a></li>
-                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Partes</a></li>
-                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Ruta</a></li>
-                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">MTB</a></li>
-                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Iniciar sesion</a></li>
-                    <li><a href="#" class="block text-xl text-black font-extrabold hover:text-gray-900 special-gothic-expanded-one-regular">Registrarse</a></li>
+                    <li><a href="#" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Ropa de Ciclismo</a></li>
+                    <li><a href="#" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Partes</a></li>
+                    <li><a href="#" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Ruta</a></li>
+                    <li><a href="#" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">MTB</a></li>
+                    <li><a href="#" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Iniciar sesion</a></li>
+                    <li><a href="#" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Registrarse</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-        <main>
+        <main>  
             <!--Las categorias se cargan dinamicamente aca-->
             <div id = "categorias-container">
                 <!--MutlicategoriaRenderer creara las secciones automaticamente aca-->
             </div>
         </main>
 
-
-        <h1>🏆 Productos Deportivos</h1>
-        <div id="cargando" class="cargando"></div>
-        <div id="productos-container" style="display: none;"></div>
-
+        
         <footer>
             <div>
                 <h1>Contactanos</h1>
