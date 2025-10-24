@@ -24,7 +24,7 @@
           .delay-400 { animation-delay: 0.4s; }
 
 
-          .producto {
+        .producto {
             border: 1px solid #ddd;
             padding: 20px;
             margin: 15px;
@@ -121,189 +121,15 @@
     </nav>
 
         <main>
-
-            <!--Seccion ropa deportiva-->
-
-            <script>
-                async function cargarProductos() {
-                    try{
-                        const response = await fetch('http://localhost:3000/api/productos')
-                        if(!response.ok){
-                            throw new Error('Error al cargar los productos');
-                        }
-                        const productos = await response.json();
-                        mostrarProductos(productos);
-                    }catch(error){
-                        console.error('Error: ', error);
-                        document.getElementById('cargando').innerHTML = "Error al cargar productos Verifica que el servidor este corriendo";
-                    }
-                }
-
-                function mostrarProductos(productos){
-                    const container = document.getElementById('productos-container');
-                    const cargando = document.getElementById('cargando')
-
-                    if(productos.length === 0){
-                        cargando.innerHTML = 'No hay productos disponibles';
-                        return;
-                    }
-                    container.innerHTML = '';
-
-                    productos.forEach(producto => {
-                    const productoDiv = document.createElement('div');
-                    productoDiv.className = 'producto';
-                
-                    productoDiv.innerHTML = `
-                        <h3>${producto.nombre_producto}</h3>
-                        <p><strong>Precio:</strong> $${producto.precio_unitario}</p>
-                        <p><strong>Stock:</strong> ${producto.cantidad} unidades</p>
-                    ${producto.imagen_url ? 
-                        `<img src="${producto.imagen_url}" alt="${producto.nombre_producto}" 
-                              onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                         <div class="sin-imagen" style="display: none;">Imagen no disponible</div>` : 
-                        '<div class="sin-imagen">Imagen no disponible</div>'
-                    }
-                `;
-                
-                container.appendChild(productoDiv);
-            });
-            
-            cargando.style.display = 'none';
-            container.style.display = 'block';
-        }
-        // Cargar productos cuando la página se carga
-        document.addEventListener('DOMContentLoaded', cargarProductos);
-                
-            </script>
-            <h1 class="xl:mx-14 mx-6 mt-20">
-                <span class="text-3xl block special-gothic-expanded-one-600 ">Ropa de Ciclismo</span>
-                <a href="/camisetas.html" class="text-md font-semibold  border-black inline-block hover:border-b-1">Ver más</a>
-            </h1>
-            <section class = "
-                flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 xl:mx-12 xl:my-0 mx-4 py-2
-                md:grid md:grid-cols-2 md:gap-12
-                xl:grid-cols-4
-                justify-items-center
-                ">
-                    <!--Objeto Uno-->
-                    <div class="snap-start flex-shrink-0 xl:w-auto w-max  max-w-sm rounded-2xl bg-white rounded-2xl border-gray-300 shadow-lg p-4 border-1  ">
-                        <div class = "bg-gray-200 rounded-2xl p-4">
-                            <!--Insginia y Corazon-->
-                            <div class = "flex justify-between items-center">
-                                <span class = "bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Mas Vendida</span>
-                                <button class = "">
-                                    ♥️
-                                </button>
-                            </div>
-                            <!--Imagen-->
-                            <div>
-                                <img src="/assets/Ropa de Ciclismo/Maillot_Manga_Corta.png" alt="Ropa" class = "w-auto h-auto object-contain">
-                            </div>
-                        </div>
-                        <!--Texto-->
-                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular">Maillot Profesional Manga Corta</h3>
-                        <p class="text-gray-500">$90.000</p>
-                        
-                        <button class = "w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
-                            Comprar
-                        </button>
-                    </div>
-                    
-                    <!--Objeto Dos-->
-                    <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white rounded-2xl border-gray-300 shadow-lg p-5 border-1 ">
-                        <!--Insginia y Corazon-->
-                        <div class = "bg-gray-200 rounded-2xl p-4">
-                            <div class = "bg-gray-200 flex justify-between items-center ">
-                                <span class = "bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Mas Vendida</span>
-                                <button class = "text-red-5500">
-                                    ♥️
-                                </button>
-                            </div>
-                            <!--Imagen-->
-                            <div>
-                                <img src="/assets/Ropa de Ciclismo/Chaqueta_impermeable.png" alt="Ropa 2" class = "w-auto h-auto object-contain">
-                            </div>
-                        </div>
-                        <!--Texto-->
-                        
-                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular">Chaqueta Impermeable</h3>
-                        <p class="text-gray-500">$90.000</p>
-                        
-                        <button class = "w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
-                            Comprar
-                        </button>
-                    </div>
-
-                    <!--Objeto Tres-->
-                    <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white rounded-2xl border-gray-300     shadow-lg p-5 border-1">
-                        <div class = "bg-gray-200 rounded-2xl p-4">
-                            <!--Insginia y Corazon-->
-                            <div class = "flex justify-between items-center">
-                                <span class = "bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Mas Vendida</span>
-                                <button class = "text-red-5500">
-                                    ♥️
-                                </button>
-                            </div>
-                            <!--Imagen-->
-                            <div>
-                                <img src="/assets/Camisetas/Camisa_Uno_Anverso-removebg-preview.png" alt="Ropa 3" class = "w-auto h-auto object-contain">
-                            </div>
-                        </div>
-                        <!--Texto-->
-                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular">Ropa 3</h3>
-                        <p class="text-gray-500">$90.000</p>
-                        <button class = "w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
-                            Comprar
-                        </button>
-                    </div>
-
-                    <!--Objeto Cuatro-->
-                    <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white rounded-2xl border-gray-300 shadow-lg p-5 border-1 ">
-                        <!--Insginia y Corazon-->
-                        <div class = "bg-gray-200 rounded-2xl p-4">
-                            <div class = "flex justify-between items-center">
-                                <span class = "bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Mas Vendida</span>
-                                <button class = "text-red-5500">
-                                    ♥️
-                                </button>
-                            </div>
-                            <!--Imagen-->
-                            <div>
-                                <img src="/assets/Camisetas/Camisa_Uno_Anverso-removebg-preview.png" alt="Ropa 4" class = "w-auto h-auto object-contain">
-                            </div>
-                        </div>
-                        <!--Texto-->
-                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular">Ropa 4</h3>
-                        <p class="text-gray-500">$90.000</p>
-                        
-                        <button class = "w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-400 transition">
-                            Comprar
-                        </button>
-                    </div>
-            </section>
-
-            <!--Seccion Pantalones-->
-            <section class = "grid grid-cols-5 gap-10 p-12 border-2 rounded-md border-black m-4">
-                <div class="col-start-1 col-end-2 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
-                <div class="col-start-2 col-end-3 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
-                <div class="col-start-3 col-end-4 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
-                <div class="col-start-4 col-end-5 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
-                <div class="col-start-5 col-end-6 border-2 rounded-md border-black"><img src="/assets/Pantalones/pantalonCafeModelo.png" alt="" class = ""></div>
-        </section>
-
-            <!--Seccion Hoodies-->
-            <section class = "grid grid-cols-5 gap-10 p-12 border-2 rounded-md border-black m-4">
-                <div class="col-start-1 col-end-2 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
-                <div class="col-start-2 col-end-3 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
-                <div class="col-start-3 col-end-4 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
-                <div class="col-start-4 col-end-5 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
-                <div class="col-start-5 col-end-6 border-2 rounded-md border-black"><img src="/assets/Hoodies/hoodieGris.png" alt="" class = ""></div>
-        </section>
+            <!--Las categorias se cargan dinamicamente aca-->
+            <div id = "categorias-container">
+                <!--MutlicategoriaRenderer creara las secciones automaticamente aca-->
+            </div>
         </main>
 
 
         <h1>🏆 Productos Deportivos</h1>
-        <div id="cargando" class="cargando">Cargando productos...</div>
+        <div id="cargando" class="cargando"></div>
         <div id="productos-container" style="display: none;"></div>
 
         <footer>
@@ -344,5 +170,10 @@
         }
     });
 </script>
+
+<!-- Cargar JavaScripts -->
+<script src="/public/js/ProductoRenderer.js"></script>
+<script src="/public/js/MultiCategoriaRenderer.js"></script>
+<script src="/public/js/app.js"></script>
 
 </html>
