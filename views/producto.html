@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Producto - Cycla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .special-gothic-expanded-one-600 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        .special-gothic-expanded-one-regular {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white shadow-md bg-white/20 shadow-lg ring-1 ring-black/2 px-30 ">
+    <div class="hidden lg:flex items-center justify-between px-30 py-2">
+        <div class="flex-shrink-0">
+            <a href="/">
+                <img src="/assets/Cycla_Logo.svg" alt="cycla" class="block w-10 h-auto">
+            </a>
+        </div>
+        <div class="flex items-center justify-between gap-8">
+            <a href="/productos.html?categoria=1" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Ropa de Ciclismo</a>
+            <a href="/productos.html?categoria=2" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Partes</a>
+            <a href="/productos.html?categoria=3" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Bicicletas</a>
+            <a href="/login class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Iniciar Sesion</a>
+            <a href="/register" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Registrarse</a>
+        </div>
+    </div>
+
+    <!-- NAV MOBILE -->
+    <div class="lg:hidden flex items-center justify-between px-10 py-4">
+        <a href="/">
+            <img src="/assets/Cycla_Logo.svg" alt="logo-Cycla" class="w-10 h-auto">
+        </a>
+        <div class="relative z-50">
+            <input id="menu-checkbox" type="checkbox" class="peer hidden" />
+            <label for="menu-checkbox" class="flex flex-col gap-1 cursor-pointer">
+                <span class="block w-6 h-0.5 bg-black transition-all peer-checked:rotate-45 peer-checked:translate-y-1.5"></span>
+                <span class="block w-6 h-0.5 bg-gray-800 transition-all peer-checked:opacity-0"></span>
+                <span class="block w-6 h-0.5 bg-gray-800 transition-all peer-checked:-rotate-45 peer-checked:-translate-y-1.5"></span>
+            </label>
+            <ul class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg py-20 px-10 space-y-6 transform -translate-x-full transition-transform duration-700 ease-in-out peer-checked:translate-x-0">
+                <li class="my-6">
+                    <a href="/">
+                        <img src="/assets/Cycla_Logo.svg" alt="logo-cycla" class="w-10 h-auto border-b-1">
+                    </a>
+                </li>
+                <li><a href="/productos.html?categoria=1" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Ropa de Ciclismo</a></li>
+                <li><a href="/productos.html?categoria=2" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Partes</a></li>
+                <li><a href="/productos.html?categoria=3" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Bicicletas</a></li>
+                <li><a href="/login" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Iniciar sesion</a></li>
+                <li><a href="/register" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Registrarse</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<nav class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center space-x-2 text-sm text-gray-600">
+            <a href="/" class="hover:text-gray-900">Inicio</a>
+            <span>›</span>
+            <a href="#" id="breadcrumb-categoria" class="hover:text-gray-900">Categoría</a>
+            <span>›</span>
+            <span class="text-gray-900 font-semibold" id="breadcrumb-producto">Producto</span>
+        </div>
+    </div>
+</nav>
+
+<!-- DETALLE DEL PRODUCTO -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div id="loading-producto" class="text-center py-12">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        <p class="text-gray-600 mt-4">Cargando producto...</p>
+    </div>
+
+    <div id="producto-detalle" class="hidden">
+        <!-- Contenido se cargará dinámicamente -->
+    </div>
+
+    <div id="error-producto" class="hidden text-center py-12">
+        <div class="text-red-500 text-6xl mb-4">😔</div>
+        <p class="text-red-500 text-lg font-semibold mb-2">Producto no encontrado</p>
+        <p class="text-gray-600 mb-4">El producto que buscas no existe o no está disponible.</p>
+        <a href="/" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full transition font-semibold">
+            Volver al Inicio
+        </a>
+    </div>
+</main>
+
+<!-- PRODUCTOS RELACIONADOS -->
+<section class="bg-gray-50 py-12 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8 special-gothic-expanded-one-600 text-center">
+            Productos Relacionados
+        </h2>
+        <div id="productos-relacionados" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Productos relacionados se cargarán aquí -->
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Brand Section -->
+            <div class="lg:col-span-1">
+                <div class="flex items-center mb-4">
+                    <img src="/assets/Cycla_Logo.svg" alt="Cycla" class="w-10 h-10 mr-3">
+                    <span class="text-xl font-bold special-gothic-expanded-one-600">CYCLA</span>
+                </div>
+                <p class="text-gray-400 mb-4 text-sm">
+                    Tu tienda especializada en ciclismo. Encuentra todo lo que necesitas para tu pasión sobre ruedas.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4 special-gothic-expanded-one-600">Enlaces Rápidos</h3>
+                <ul class="space-y-2">
+                    <li><a href="/" class="text-gray-400 hover:text-white transition-colors">Inicio</a></li>
+                    <li><a href="/productos.html?categoria=1" class="text-gray-400 hover:text-white transition-colors">Ropa de Ciclismo</a></li>
+                    <li><a href="/productos.html?categoria=2" class="text-gray-400 hover:text-white transition-colors">Partes de Ciclismo</a></li>
+                    <li><a href="/productos.html?categoria=3" class="text-gray-400 hover:text-white transition-colors">Bicicletas</a></li>
+                </ul>
+            </div>
+
+            <!-- Categories -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4 special-gothic-expanded-one-600">Categorías</h3>
+                <ul class="space-y-2">
+                    <li><a href="/productos.html?categoria=1" class="text-gray-400 hover:text-white transition-colors">Ropa de Ciclismo</a></li>
+                    <li><a href="/productos.html?categoria=2" class="text-gray-400 hover:text-white transition-colors">Partes de Ciclismo</a></li>
+                    <li><a href="/productos.html?categoria=3" class="text-gray-400 hover:text-white transition-colors">Bicicletas</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact & Support -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4 special-gothic-expanded-one-600">Soporte</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contacto</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Envíos</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Garantías</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+            <p class="text-gray-400 text-sm">&copy; 2025 Cycla. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Cargar JavaScripts -->
+<script src="/js/AuthManager.js"></script>
+<script src="/js/ProductoRenderer.js"></script>
+<script src="/js/CarritoManager.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/ProductoPage.js"></script>
+</body>
+</html>

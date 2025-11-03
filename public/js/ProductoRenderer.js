@@ -1,92 +1,83 @@
 class ProductoRenderer {
     constructor(apiBase = 'http://localhost:3000/api') {
         this.apiBase = apiBase;
-        
-        //
+
+        // Productos específicos que queremos mostrar
         this.productosDestacados = {
-            1: [1, 3, 4, 5],      // Ropa de Ciclismo
-            2: [13, 2, 10, 11],  // Partes de Ciclismo  
-            3: [39, 40, 43, 44]   // Bicicletas
+            1: [1, 3, 4, 6],      // Ropa de Ciclismo: Maillot, Guantes, Chaqueta, Casco
+            2: [13, 2, 10, 11],   // Partes de Ciclismo: Bidón, Sillín, GPS, Portabidones
+            3: [39, 40, 43, 44]   // Bicicletas: Carretera, MTB, Triatlón, Gravel
         };
 
-
-        // 🆕 Mapa de imágenes por defecto como fallback
+        // Mapa de imágenes por defecto como fallback
         this.imagenesDefault = {
-            'Maillot Profesional Manga Corta': '/assets/Ropa de Ciclismo/Maillot_Manga_Corta.png',
-            'Chaqueta Impermeable': '/assets/Ropa de Ciclismo/Chaqueta_impermeable.png',
-            'Guantes de Ciclismo con Gel': '/assets/Ropa de Ciclismo/guantes-ejemplo.png',
-            
+            'Maillot Profesional Manga Corta': '/assets/productos/ropa-ciclismo/maillotProfesionaMangaCorta.png',
+            'Guantes de Ciclismo con Gel': '/assets/productos/ropa-ciclismo/guantesCiclismoConGel.png',
+            'Chaqueta Impermeable': '/assets/productos/ropa-ciclismo/chaquetaImpermeable.png',
+            'Casco Aero Profesional': '/assets/productos/ropa-ciclismo/cascoAeroProfesional.png',
+            'Sillin de Competición': '/assets/productos/partes-ciclismo/sillinDeCompeticion.png',
+            'Bidón Deportivo 750ml': '/assets/productos/partes-ciclismo/bidonDeportivo.png',
+            'Computadora GPS Ciclocomputador': '/assets/productos/partes-ciclismo/computadoraGpsCiclocomputador.png',
+            'Portabidones Carbono': '/assets/productos/partes-ciclismo/portabidonesCarbono.png',
+            'Bicicleta de Carretera Carbono': '/assets/productos/bicicletas/bicicletaDeCarreteraCarbono.png'
         };
     }
 
-    async cargarProductosCategoria(categoriaId = 1, limit = 12, containerId = 'productos-container') {
-    try {
-        console.log(`🔄 Cargando productos de categoría ${categoriaId}...`);
-        
-        const response = await fetch(`${this.apiBase}/productos/categoria/${categoriaId}`);
-        
-        if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
-        }
-        
-        const todosProductos = await response.json();
-        
-        console.log(`📦 Productos encontrados:`, 
-            todosProductos.map(p => ({ id: p.id, nombre: p.nombre_producto })));
-        
-        // 🆕 MOSTRAR TODOS los productos (hasta el límite)
-        const productosAMostrar = todosProductos.slice(0, limit);
-        
-        console.log(`✅ ${productosAMostrar.length} productos a mostrar:`, 
-            productosAMostrar.map(p => p.id));
-        
-        this.renderizarProductos(productosAMostrar, containerId);
-        return productosAMostrar;
-        
-    } catch (error) {
-        console.error('❌ Error cargando productos:', error);
-        await this.cargarProductosNormales(categoriaId, limit, containerId);
-        return [];
-    }
-}
-
-    // 🆕 MÉTODO MEJORADO: Fallback con IDs específicos
-    async cargarProductosNormales(categoriaId, limit, containerId) {
+    async cargarProductosCategoria(categoriaId = 1, limit = 4, containerId = 'productos-container') {
         try {
-            console.log(`🔄 Usando fallback para categoría ${categoriaId}...`);
-            
-            // Intentar cargar productos destacados por IDs específicos
-            const productosDestacadosIds = this.productosDestacados[categoriaId] || [];
-            if (productosDestacadosIds.length > 0) {
-                const productos = await this.cargarProductosPorIds(productosDestacadosIds);
-                if (productos.length > 0) {
-                    this.renderizarProductos(productos.slice(0, limit), containerId);
-                    return productos;
-                }
-            }
-            
-            // Si no funciona, cargar productos normales de la categoría
+            console.log(`🔄 Cargando ${limit} productos de categoría ${categoriaId}...`);
+            console.log(`📡 URL: ${this.apiBase}/productos/categoria/${categoriaId}?limit=${limit}`);
+
             const response = await fetch(`${this.apiBase}/productos/categoria/${categoriaId}?limit=${limit}`);
+
+            console.log(`📊 Response status: ${response.status}`);
+
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+
             const productos = await response.json();
+            console.log(`📦 ${productos.length} productos recibidos para categoría ${categoriaId}`);
+
             this.renderizarProductos(productos, containerId);
             return productos;
-            
+
         } catch (error) {
-            this.mostrarError(containerId);
-            return [];
+            console.error('❌ Error cargando productos:', error);
+            // Fallback: usar productos destacados
+            return await this.cargarProductosDestacados(categoriaId, limit, containerId);
         }
     }
 
-    // 🆕 MÉTODO: Cargar productos por IDs específicos
-    async cargarProductosPorIds(ids) {
+    // Método fallback con productos destacados
+    async cargarProductosDestacados(categoriaId, limit, containerId) {
         try {
-            const response = await fetch(`${this.apiBase}/productos/ids?ids=${ids.join(',')}`);
-            if (response.ok) {
-                return await response.json();
+            console.log(`🔄 Usando productos destacados para categoría ${categoriaId}...`);
+
+            const productosDestacadosIds = this.productosDestacados[categoriaId] || [];
+            if (productosDestacadosIds.length === 0) {
+                throw new Error('No hay productos destacados para esta categoría');
             }
-            return [];
+
+            // Cargar todos los productos de la categoría y filtrar
+            const response = await fetch(`${this.apiBase}/productos/categoria/${categoriaId}?limit=20`);
+            if (!response.ok) {
+                throw new Error('Error cargando productos para filtrado');
+            }
+
+            const todosProductos = await response.json();
+            const productosFiltrados = todosProductos.filter(producto =>
+                productosDestacadosIds.includes(producto.id)
+            ).slice(0, limit);
+
+            console.log(`🎯 ${productosFiltrados.length} productos destacados cargados`);
+
+            this.renderizarProductos(productosFiltrados, containerId);
+            return productosFiltrados;
+
         } catch (error) {
-            console.error('Error cargando productos por IDs:', error);
+            console.error('❌ Error cargando productos destacados:', error);
+            this.mostrarError(containerId, 'No se pudieron cargar los productos');
             return [];
         }
     }
@@ -95,86 +86,150 @@ class ProductoRenderer {
         const container = document.getElementById(containerId);
 
         if (!container) {
-            console.error(`Contenedor #${containerId} no encontrado`);
+            console.error(`❌ Contenedor #${containerId} no encontrado`);
             return;
         }
 
         if (!productos || productos.length === 0) {
-            container.innerHTML = '<div class="text-center py-8">No hay productos disponibles</div>';
+            container.innerHTML = `
+                <div class="col-span-full text-center py-12">
+                    <div class="text-gray-400 text-6xl mb-4">😔</div>
+                    <p class="text-gray-500 text-lg">No hay productos disponibles</p>
+                    <p class="text-gray-400 text-sm mt-2">Intenta recargar la página</p>
+                </div>
+            `;
             return;
         }
 
-        const tituloElement = document.getElementById('categoria-titulo');
-        if (tituloElement && productos.length > 0 && productos[0].categoria_nombre) {
-            tituloElement.textContent = productos[0].categoria_nombre;
-        }
+        console.log(`🎨 Renderizando ${productos.length} productos en #${containerId}`);
 
         container.innerHTML = productos.map(producto => this.crearCardProducto(producto)).join('');
+
+        // Agregar event listeners para los botones de compra
+        this.inicializarEventosProductos(containerId);
     }
 
     crearCardProducto(producto) {
         const esMasVendido = producto.cantidad > 50;
+        const esStockBajo = producto.cantidad < 10;
+        const precioFormateado = this.formatearPrecio(producto.precio_unitario);
 
         return `
-            <div class="snap-start flex-shrink-0 xl:w-auto w-max max-w-sm rounded-2xl bg-white border-gray-300 shadow-lg p-4 border-1">
-                <div class="bg-gray-200 rounded-2xl p-4">
-                    <div class="flex justify-between items-center">
-                        ${esMasVendido ? 
-                            '<span class="bg-gray-100 text-gray-600 text-sm px-3 py-1 rounded-full">Más Vendido</span>' : 
-                            '<span class="bg-blue-100 text-blue-600 text-sm px-3 py-1 rounded-full">Nuevo</span>'
-                        }
-                        <button class="text-red-500 hover:text-red-700 transition favorito-btn" data-producto-id="${producto.id}">
-                            ♥️
-                        </button>
+            <div class="snap-start flex-shrink-0 w-72 rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 p-4 group">
+                <!-- Enlace en toda la tarjeta -->
+                <a href="/producto.html?id=${producto.id}" class="block cursor-pointer">
+                    <div class="bg-gray-100 rounded-2xl p-4 relative group-hover:bg-gray-200 transition-colors duration-300">
+                        <div class="flex justify-between items-center mb-2">
+                            ${esMasVendido ?
+            '<span class="bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded-full font-semibold">🔥 Más Vendido</span>' :
+            '<span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full font-semibold">🆕 Nuevo</span>'
+        }
+                            <button class="text-gray-400 hover:text-red-500 transition favorito-btn" 
+                                    data-producto-id="${producto.id}"
+                                    title="Añadir a favoritos"
+                                    onclick="event.preventDefault(); event.stopPropagation();">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        ${esStockBajo ?
+            '<span class="absolute top-2 right-2 bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-semibold">⚠️ Últimas unidades</span>' :
+            ''
+        }
+                        
+                        <div class="mt-4 flex justify-center items-center h-48">
+                            ${this.obtenerImagenProducto(producto)}
+                        </div>
                     </div>
-                    <div class="mt-4">
-                        ${this.obtenerImagenProducto(producto)}
+                    
+                    <div class="mt-4 space-y-2">
+                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular leading-tight min-h-[3rem] group-hover:text-blue-600 transition-colors">
+                            ${producto.nombre_producto}
+                        </h3>
+                        <p class="text-2xl font-bold text-gray-900">${precioFormateado}</p>
+                        
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-600 ${esStockBajo ? 'text-red-500 font-semibold' : ''}">
+                                ${esStockBajo ? 'Solo ' : ''}${producto.cantidad} unidades
+                            </span>
+                            <span class="text-gray-400">Código: ${producto.id}</span>
+                        </div>
                     </div>
-                </div>
-                <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular mt-4">${producto.nombre_producto}</h3>
-                <p class="text-gray-500">$${this.formatearPrecio(producto.precio_unitario)}</p>
-                <p class="text-sm text-gray-600">Stock: ${producto.cantidad} unidades</p>
+                </a>
                 
-                <button class="w-full mt-4 bg-black text-white py-2 rounded-full hover:bg-gray-800 transition comprar-btn" 
-                        data-producto-id="${producto.id}" data-producto-nombre="${producto.nombre_producto}">
-                    Comprar
+                <button class="w-full mt-4 bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition font-semibold comprar-btn" 
+                        data-producto-id="${producto.id}" 
+                        data-producto-nombre="${producto.nombre_producto}"
+                        data-producto-precio="${producto.precio_unitario}"
+                        onclick="event.stopPropagation();">
+                    🛒 Añadir al Carrito
                 </button>
             </div>
         `;
     }
 
     obtenerImagenProducto(producto) {
-    if (producto.imagen_url) {
+        if (producto.imagen_url) {
+            return `
+                <img src="${producto.imagen_url}" 
+                     alt="${producto.nombre_producto}" 
+                     class="max-w-full max-h-48 object-contain transition-transform group-hover:scale-105 duration-300"
+                     onerror="this.src='${this.getImagenFallback(producto)}'"
+                     loading="lazy">
+            `;
+        }
+
+        const imagenDefault = this.getImagenFallback(producto);
         return `
-        <img src="${producto.imagen_url}" alt="${producto.nombre_producto}" 
-        class="w-full h-48 object-contain"  // ← Cambié h-50 por h-48 para consistencia
-        onerror="this.src='${this.getImagenFallback(producto)}'">`;
+            <img src="${imagenDefault}" 
+                 alt="${producto.nombre_producto}"
+                 class="max-w-full max-h-48 object-contain transition-transform group-hover:scale-105 duration-300"
+                 loading="lazy">
+        `;
     }
 
-    const imagenDefault = this.getImagenFallback(producto);
-    return `
-    <img src="${imagenDefault}" alt="${producto.nombre_producto}"
-    class="w-full h-48 object-contain">`;
-}
-    getImagenFallback(producto){
+    getImagenFallback(producto) {
         return this.imagenesDefault[producto.nombre_producto] || '/assets/placeholder.jpg';
     }
 
-    formatearPrecio(precio) {
-        return parseFloat(precio).toLocaleString('es-CO');
+    inicializarEventosProductos(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        // Los eventos de compra están manejados por app.js
+        console.log(`🎯 Eventos de productos inicializados para #${containerId}`);
     }
 
-    mostrarError(containerId) {
+    formatearPrecio(precio) {
+        if (!precio) return '$0';
+        return `$${parseFloat(precio).toLocaleString('es-CO')}`;
+    }
+
+    mostrarError(containerId, mensaje = 'Error cargando productos') {
         const container = document.getElementById(containerId);
         if (container) {
             container.innerHTML = `
-                <div class="col-span-full text-center py-8">
-                    <p class="text-red-500">Error cargando productos. Verifica la conexión.</p>
-                    <button onclick="app.recargarProductos()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
-                        Reintentar
+                <div class="col-span-full text-center py-12">
+                    <div class="text-red-500 text-6xl mb-4">⚠️</div>
+                    <p class="text-red-500 text-lg font-semibold mb-2">${mensaje}</p>
+                    <p class="text-gray-600 mb-4">Verifica tu conexión a internet</p>
+                    <button onclick="window.app.recargarProductos()" 
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full transition font-semibold">
+                        🔄 Reintentar
                     </button>
                 </div>
             `;
         }
+    }
+
+    // Método para debug
+    debug() {
+        console.log('🔍 Debug ProductoRenderer:', {
+            apiBase: this.apiBase,
+            productosDestacados: this.productosDestacados,
+            imagenesDefault: this.imagenesDefault
+        });
     }
 }

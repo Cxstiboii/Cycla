@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse - Cycla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .special-gothic-expanded-one-600 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        .special-gothic-expanded-one-regular {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+<div class="max-w-md w-full space-y-8 p-8">
+    <!-- Logo -->
+    <div class="text-center">
+        <a href="/">
+            <img src="/assets/Cycla_Logo.svg" alt="Cycla" class="mx-auto h-16 w-auto">
+        </a>
+        <h2 class="mt-6 text-3xl font-bold text-gray-900 special-gothic-expanded-one-600">
+            Crear Cuenta
+        </h2>
+        <p class="mt-2 text-sm text-gray-600">
+            O <a href="/login" class="font-medium text-blue-600 hover:text-blue-500">inicia sesión</a>
+        </p>
+    </div>
+
+    <!-- Formulario -->
+    <form id="form-register" class="mt-8 space-y-6 bg-white p-8 rounded-2xl shadow-lg">
+        <!-- Mensajes -->
+        <div id="mensaje-exito" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded"></div>
+        <div id="mensaje-error" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded"></div>
+
+        <div class="space-y-4">
+            <!-- Nombre -->
+            <div>
+                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre completo</label>
+                <input id="nombre" name="nombre" type="text" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="Tu nombre completo">
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input id="email" name="email" type="email" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="tu@email.com">
+            </div>
+
+            <!-- Contraseña -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                <input id="password" name="password" type="password" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="Mínimo 6 caracteres">
+            </div>
+
+            <!-- Confirmar Contraseña -->
+            <div>
+                <label for="confirmar-password" class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
+                <input id="confirmar-password" name="confirmar-password" type="password" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="Repite tu contraseña">
+            </div>
+        </div>
+
+        <!-- Botón de envío -->
+        <div>
+            <button id="btn-register" type="submit"
+                    class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+                <span id="btn-register-texto">Crear Cuenta</span>
+                <span id="btn-register-cargando" class="hidden">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Creando cuenta...
+                    </span>
+            </button>
+        </div>
+
+        <!-- Enlaces adicionales -->
+        <div class="text-center">
+            <a href="/" class="text-sm text-blue-600 hover:text-blue-500">
+                ← Volver al inicio
+            </a>
+        </div>
+    </form>
+</div>
+
+<!-- Cargar JavaScripts -->
+<script src="/js/AuthManager.js"></script>
+<script src="/js/RegisterPage.js"></script>
+</body>
+</html>

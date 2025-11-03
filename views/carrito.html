@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Cycla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .special-gothic-expanded-one-600 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        .special-gothic-expanded-one-regular {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+<!-- NAVBAR -->
+<nav class="sticky top-0 z-50 bg-white shadow-md bg-white/20 shadow-lg ring-1 ring-black/2">
+    <div class="hidden lg:flex items-center justify-between px-30 py-2">
+        <div class="flex-shrink-0">
+            <a href="/">
+                <img src="/assets/Cycla_Logo.svg" alt="cycla" class="block w-10 h-auto">
+            </a>
+        </div>
+        <div class="flex items-center justify-between gap-8">
+            <a href="/productos?categoria=1" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Ropa de Ciclismo</a>
+            <a href="/productos?categoria=2" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Partes</a>
+            <a href="/productos?categoria=3" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Bicicletas</a>
+            <!-- En la sección del navbar, cambiar los enlaces de login/register: -->
+            <a href="/login" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Iniciar Sesion</a>
+            <a href="/register" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Registrarse</a>
+    </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<nav class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center space-x-2 text-sm text-gray-600">
+            <a href="/" class="hover:text-gray-900">Inicio</a>
+            <span>›</span>
+            <span class="text-gray-900 font-semibold">Carrito de Compras</span>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-3xl font-bold text-gray-900 special-gothic-expanded-one-600 mb-8">
+        Tu Carrito de Compras
+    </h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Lista de productos -->
+        <div class="lg:col-span-2">
+            <div id="carrito-items" class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="text-center py-12">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+                    <p class="text-gray-600 mt-4">Cargando carrito...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen del pedido -->
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-4 special-gothic-expanded-one-600">
+                    Resumen del Pedido
+                </h2>
+
+                <div id="resumen-pedido" class="space-y-3 mb-6">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Subtotal:</span>
+                        <span id="subtotal" class="font-semibold">$0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Envío:</span>
+                        <span id="envio" class="font-semibold">$0</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold border-t pt-3">
+                        <span>Total:</span>
+                        <span id="total" class="text-green-600">$0</span>
+                    </div>
+                </div>
+
+                <button id="btn-pagar"
+                        class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-semibold text-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        disabled>
+                    🛒 Proceder al Pago
+                </button>
+
+                <p class="text-xs text-gray-500 text-center mt-4">
+                    Al hacer clic en "Proceder al Pago", serás redirigido a completar tu compra
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-white mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center">
+            <p class="text-gray-400 text-sm">&copy; 2025 Cycla. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Cargar JavaScripts -->
+<script src="/js/AuthManager.js"></script>
+<script src="/js/CarritoManager.js"></script>
+<script src="/js/CarritoPage.js"></script>
+</body>
+</html>

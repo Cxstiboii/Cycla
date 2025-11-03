@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - Cycla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .special-gothic-expanded-one-600 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        .special-gothic-expanded-one-regular {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+<!-- NAVBAR (igual que en index.html) -->
+<nav class="sticky top-0 z-50 bg-white shadow-md bg-white/20 shadow-lg ring-1 ring-black/2">
+    <div class="hidden lg:flex items-center justify-between px-30 py-2">
+        <div class="flex-shrink-0">
+            <a href="/">
+                <img src="/assets/Cycla_Logo.svg" alt="cycla" class="block w-10 h-auto">
+            </a>
+        </div>
+        <div class="flex items-center justify-between gap-8">
+            <a href="/productos.html?categoria=1" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Ropa de Ciclismo</a>
+            <a href="/productos.html?categoria=2" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Partes</a>
+            <a href="/productos.html?categoria=3" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Bicicletas</a>
+            <a href="/login" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Iniciar Sesion</a>
+            <a href="/register" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Registrarse</a>
+        </div>
+    </div>
+
+    <!-- NAV MOBILE -->
+    <div class="lg:hidden flex items-center justify-between px-10 py-4">
+        <a href="/">
+            <img src="/assets/Cycla_Logo.svg" alt="logo-Cycla" class="w-10 h-auto">
+        </a>
+        <div class="relative z-50">
+            <input id="menu-checkbox" type="checkbox" class="peer hidden" />
+            <label for="menu-checkbox" class="flex flex-col gap-1 cursor-pointer">
+                <span class="block w-6 h-0.5 bg-black transition-all peer-checked:rotate-45 peer-checked:translate-y-1.5"></span>
+                <span class="block w-6 h-0.5 bg-gray-800 transition-all peer-checked:opacity-0"></span>
+                <span class="block w-6 h-0.5 bg-gray-800 transition-all peer-checked:-rotate-45 peer-checked:-translate-y-1.5"></span>
+            </label>
+            <ul class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg py-20 px-10 space-y-6 transform -translate-x-full transition-transform duration-700 ease-in-out peer-checked:translate-x-0">
+                <li class="my-6">
+                    <a href="/">
+                        <img src="/assets/Cycla_Logo.svg" alt="logo-cycla" class="w-10 h-auto border-b-1">
+                    </a>
+                </li>
+                <li><a href="/productos.html?categoria=1" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Ropa de Ciclismo</a></li>
+                <li><a href="/productos.html?categoria=2" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Partes</a></li>
+                <li><a href="/productos.html?categoria=3" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Bicicletas</a></li>
+                <li><a href="/login" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Iniciar sesion</a></li>
+                <li><a href="/register" class="block text-xl text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular">Registrarse</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Breadcrumb -->
+    <nav class="mb-8">
+        <div class="flex items-center space-x-2 text-sm text-gray-600">
+            <a href="/" class="hover:text-gray-900">Inicio</a>
+            <span>›</span>
+            <span class="text-gray-900 font-semibold" id="breadcrumb-categoria">Productos</span>
+        </div>
+    </nav>
+
+    <!-- Título de la categoría -->
+    <h1 class="text-3xl font-bold text-gray-900 special-gothic-expanded-one-600 mb-8" id="titulo-categoria">
+        Todos los Productos
+    </h1>
+
+    <!-- Contenedor de productos -->
+    <div id="productos-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Los productos se cargarán aquí dinámicamente -->
+        <div class="text-center py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <p class="text-gray-600 mt-4">Cargando productos...</p>
+        </div>
+    </div>
+</main>
+
+<!-- FOOTER (igual que en index.html) -->
+<footer class="bg-gray-900 text-white mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- ... mismo footer que index.html ... -->
+        </div>
+    </div>
+</footer>
+
+<!-- Cargar JavaScripts -->
+<script src="/js/AuthManager.js"></script>
+<script src="/js/ProductoRenderer.js"></script>
+<script src="/js/CarritoManager.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/ProductosPage.js"></script>
+</body>
+</html>
