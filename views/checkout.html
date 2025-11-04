@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Cycla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .special-gothic-expanded-one-600 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        .special-gothic-expanded-one-regular {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+<!-- NAVBAR (igual que en otras páginas) -->
+<nav class="sticky top-0 z-50 bg-white shadow-md bg-white/20 shadow-lg ring-1 ring-black/2">
+    <div class="hidden lg:flex items-center justify-between px-30 py-2">
+        <div class="flex-shrink-0">
+            <a href="/">
+                <img src="/assets/Cycla_Logo.svg" alt="cycla" class="w-10 h-auto">
+            </a>
+        </div>
+        <div class="flex items-center justify-between gap-8">
+            <a href="/productos?categoria=1" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Ropa de Ciclismo</a>
+            <a href="/productos?categoria=2" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Partes</a>
+            <a href="/productos?categoria=3" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Bicicletas</a>
+
+            <!-- Menú de usuario -->
+            <div class="relative group" id="menu-usuario">
+                <button class="flex items-center space-x-2 text-black font-medium special-gothic-expanded-one-600 py-2">
+                    <span id="nombre-usuario-nav">Mi Cuenta</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50 hidden group-hover:block">
+                    <div class="py-2">
+                        <a href="/perfil" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Perfil</a>
+                        <a href="/carrito" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Carrito</a>
+                        <div class="border-t border-gray-200 mt-2 pt-2">
+                            <button id="btn-logout" class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">Cerrar Sesión</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<nav class="bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="flex items-center space-x-2 text-sm text-gray-600">
+            <a href="/" class="hover:text-gray-900">Inicio</a>
+            <span>›</span>
+            <a href="/carrito.html" class="hover:text-gray-900">Carrito</a>
+            <span>›</span>
+            <span class="text-gray-900 font-semibold">Finalizar Compra</span>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-3xl font-bold text-gray-900 special-gothic-expanded-one-600 mb-8">
+        Finalizar Compra
+    </h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- Formulario de envío y pago -->
+        <div class="space-y-6">
+            <!-- Información de envío -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Información de Envío</h2>
+                <form id="form-envio" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="nombre" class="block text-sm font-medium text-gray-700 mb-1">Nombre *</label>
+                            <input type="text" id="nombre" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="apellido" class="block text-sm font-medium text-gray-700 mb-1">Apellido *</label>
+                            <input type="text" id="apellido" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="direccion" class="block text-sm font-medium text-gray-700 mb-1">Dirección *</label>
+                        <input type="text" id="direccion" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="ciudad" class="block text-sm font-medium text-gray-700 mb-1">Ciudad *</label>
+                            <input type="text" id="ciudad" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="departamento" class="block text-sm font-medium text-gray-700 mb-1">Departamento *</label>
+                            <input type="text" id="departamento" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="codigo-postal" class="block text-sm font-medium text-gray-700 mb-1">Código Postal *</label>
+                            <input type="text" id="codigo-postal" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="telefono" class="block text-sm font-medium text-gray-700 mb-1">Teléfono *</label>
+                        <input type="tel" id="telefono" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Método de pago -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Método de Pago</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3 p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
+                        <input type="radio" name="metodo-pago" id="tarjeta" value="tarjeta" class="text-blue-600 focus:ring-blue-500" checked>
+                        <label for="tarjeta" class="flex-1 cursor-pointer">
+                            <span class="font-semibold">Tarjeta de Crédito/Débito</span>
+                        </label>
+                    </div>
+
+                    <div id="form-tarjeta" class="space-y-4">
+                        <div>
+                            <label for="numero-tarjeta" class="block text-sm font-medium text-gray-700 mb-1">Número de Tarjeta *</label>
+                            <input type="text" id="numero-tarjeta" placeholder="1234 5678 9012 3456" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="fecha-expiracion" class="block text-sm font-medium text-gray-700 mb-1">Fecha Expiración *</label>
+                                <input type="text" id="fecha-expiracion" placeholder="MM/AA" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="cvv" class="block text-sm font-medium text-gray-700 mb-1">CVV *</label>
+                                <input type="text" id="cvv" placeholder="123" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen del pedido -->
+        <div class="space-y-6">
+            <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Resumen del Pedido</h2>
+
+                <div id="resumen-checkout" class="space-y-3 mb-6">
+                    <!-- Los productos se cargarán aquí -->
+                </div>
+
+                <div class="border-t pt-4 space-y-2">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Subtotal:</span>
+                        <span id="subtotal-checkout" class="font-semibold">$0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Envío:</span>
+                        <span id="envio-checkout" class="font-semibold">$0</span>
+                    </div>
+                    <div class="flex justify-between text-lg font-bold border-t pt-3">
+                        <span>Total:</span>
+                        <span id="total-checkout" class="text-green-600">$0</span>
+                    </div>
+                </div>
+
+                <button id="btn-confirmar-pedido"
+                        class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-semibold text-lg transition mt-6">
+                    ✅ Confirmar Pedido
+                </button>
+
+                <p class="text-xs text-gray-500 text-center mt-4">
+                    Al confirmar el pedido, aceptas nuestros términos y condiciones
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Cargar JavaScripts -->
+<script src="/js/AuthManager.js"></script>
+<script src="/js/CheckoutPage.js"></script>
+</body>
+</html>

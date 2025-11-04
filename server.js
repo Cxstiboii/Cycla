@@ -52,16 +52,6 @@ app.get('/carrito.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/carrito.html'));
 });
 
-// Agrega esta ruta en "Rutas de páginas"
-app.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/admin.html'));
-});
-
-
-// Agrega esta ruta en "Rutas de páginas"
-app.get('/perfil', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/perfil.html'));
-});
 
 // Agrega esta línea en las importaciones
 const authRoutes = require('./routes/authRoutes');

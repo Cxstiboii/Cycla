@@ -21,6 +21,9 @@ class ProductoRenderer {
             'Portabidones Carbono': '/assets/productos/partes-ciclismo/portabidonesCarbono.png',
             'Bicicleta de Carretera Carbono': '/assets/productos/bicicletas/bicicletaDeCarreteraCarbono.png'
         };
+
+        // Inicializar el carrito
+        this.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     }
 
     async cargarProductosCategoria(categoriaId = 1, limit = 4, containerId = 'productos-container') {
@@ -198,8 +201,106 @@ class ProductoRenderer {
         const container = document.getElementById(containerId);
         if (!container) return;
 
-        // Los eventos de compra están manejados por app.js
+        // Event listeners para botones de compra
+        container.querySelectorAll('.comprar-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const productoId = btn.getAttribute('data-producto-id');
+                const productoNombre = btn.getAttribute('data-producto-nombre');
+                const productoPrecio = parseFloat(btn.getAttribute('data-producto-precio'));
+
+                this.agregarAlCarrito({
+                    id: productoId,
+                    nombre: productoNombre,
+                    precio: productoPrecio,
+                    cantidad: 1
+                });
+            });
+        });
+
+        // Event listeners para botones de favoritos
+        container.querySelectorAll('.favorito-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const productoId = btn.getAttribute('data-producto-id');
+                this.agregarAFavoritos(productoId);
+            });
+        });
+
         console.log(`🎯 Eventos de productos inicializados para #${containerId}`);
+    }
+
+    agregarAlCarrito(producto) {
+        // Verificar si el producto ya está en el carrito
+        const productoExistente = this.carrito.find(item => item.id === producto.id);
+
+        if (productoExistente) {
+            productoExistente.cantidad += 1;
+        } else {
+            this.carrito.push(producto);
+        }
+
+        // Guardar en localStorage
+        this.guardarCarrito();
+
+        // Mostrar notificación
+        this.mostrarNotificacion(`✅ "${producto.nombre}" agregado al carrito`);
+
+        // Actualizar contador del carrito si existe
+        this.actualizarContadorCarrito();
+
+        console.log('🛒 Producto agregado:', producto);
+    }
+
+    agregarAFavoritos(productoId) {
+        let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+
+        if (!favoritos.includes(productoId)) {
+            favoritos.push(productoId);
+            localStorage.setItem('favoritos', JSON.stringify(favoritos));
+            this.mostrarNotificacion('❤️ Producto agregado a favoritos');
+        } else {
+            this.mostrarNotificacion('⚠️ El producto ya está en favoritos');
+        }
+    }
+
+    guardarCarrito() {
+        localStorage.setItem('carrito', JSON.stringify(this.carrito));
+    }
+
+    actualizarContadorCarrito() {
+        const contador = document.querySelector('.carrito-contador');
+        if (contador) {
+            const totalItems = this.carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            contador.textContent = totalItems;
+            contador.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+    }
+
+    mostrarNotificacion(mensaje) {
+        // Crear notificación toast
+        const toast = document.createElement('div');
+        toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 transform translate-x-full transition-transform duration-300';
+        toast.textContent = mensaje;
+
+        document.body.appendChild(toast);
+
+        // Animación de entrada
+        setTimeout(() => {
+            toast.classList.remove('translate-x-full');
+        }, 100);
+
+        // Animación de salida
+        setTimeout(() => {
+            toast.classList.add('translate-x-full');
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 300);
+        }, 3000);
     }
 
     formatearPrecio(precio) {
@@ -215,7 +316,7 @@ class ProductoRenderer {
                     <div class="text-red-500 text-6xl mb-4">⚠️</div>
                     <p class="text-red-500 text-lg font-semibold mb-2">${mensaje}</p>
                     <p class="text-gray-600 mb-4">Verifica tu conexión a internet</p>
-                    <button onclick="window.app.recargarProductos()" 
+                    <button onclick="window.location.reload()" 
                             class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full transition font-semibold">
                         🔄 Reintentar
                     </button>
@@ -224,12 +325,25 @@ class ProductoRenderer {
         }
     }
 
+    // Método para obtener el carrito
+    obtenerCarrito() {
+        return this.carrito;
+    }
+
+    // Método para limpiar el carrito
+    limpiarCarrito() {
+        this.carrito = [];
+        this.guardarCarrito();
+        this.actualizarContadorCarrito();
+    }
+
     // Método para debug
     debug() {
         console.log('🔍 Debug ProductoRenderer:', {
             apiBase: this.apiBase,
             productosDestacados: this.productosDestacados,
-            imagenesDefault: this.imagenesDefault
+            imagenesDefault: this.imagenesDefault,
+            carrito: this.carrito
         });
     }
 }
