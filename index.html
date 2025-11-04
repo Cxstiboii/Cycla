@@ -11,72 +11,41 @@
     </head>
     <body>
 
+    <!-- NAVBAR (igual que en otras páginas) -->
     <nav class="sticky top-0 z-50 bg-white shadow-md bg-white/20 shadow-lg ring-1 ring-black/2">
-        <!-- NAV DESKTOP -->
-        <div class="hidden lg:flex items-center justify-between px-8 py-2">
-            <!-- Logo -->
+        <div class="hidden lg:flex items-center justify-between px-30 py-2">
             <div class="flex-shrink-0">
-                <a href="/index.html">
-                    <img src="/assets/Cycla_Logo.svg" alt="cycla" class="block w-10 h-auto">
+                <a href="/">
+                    <img src="/assets/Cycla_Logo.svg" alt="cycla" class="w-10 h-auto">
                 </a>
             </div>
-
             <div class="flex items-center justify-between gap-8">
                 <a href="/views/productos.html?categoria=1" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Ropa de Ciclismo</a>
                 <a href="/views/productos.html?categoria=2" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Partes</a>
                 <a href="/views/productos.html?categoria=3" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Bicicletas</a>
 
-                <!-- El menú de usuario se cargará dinámicamente aquí -->
-            </div>
-        </div>
-
-        <!-- NAV MOBILE -->
-        <div class="lg:hidden flex items-center justify-between px-4 py-4">
-            <!-- Logo -->
-            <a href="/views/index.html">
-                <img src="/assets/Cycla_Logo.svg" alt="logo-Cycla" class="w-10 h-auto">
-            </a>
-
-            <div class="flex items-center gap-4">
-                <!-- Carrito Mobile -->
-                <a href="/views/carrito.html" class="flex items-center space-x-1 text-black p-2 relative">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
-                    <span id="carrito-badge-mobile" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
-                </a>
-
-                <!-- Botón Hamburguesa -->
-                <div class="relative z-50">
-                    <input id="menu-checkbox" type="checkbox" class="peer hidden" />
-                    <label for="menu-checkbox" class="flex flex-col gap-1 cursor-pointer">
-                        <span class="block w-6 h-0.5 bg-black transition-all peer-checked:rotate-45 peer-checked:translate-y-1.5"></span>
-                        <span class="block w-6 h-0.5 bg-gray-800 transition-all peer-checked:opacity-0"></span>
-                        <span class="block w-6 h-0.5 bg-gray-800 transition-all peer-checked:-rotate-45 peer-checked:-translate-y-1.5"></span>
-                    </label>
-
-                    <!-- Sidebar -->
-                    <ul class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg py-20 px-6 space-y-4 transform -translate-x-full transition-transform duration-300 ease-in-out peer-checked:translate-x-0">
-                        <li class="my-6">
-                            <a href="/views/index.html">
-                                <img src="/assets/Cycla_Logo.svg" alt="logo-cycla" class="w-10 h-auto">
-                            </a>
-                        </li>
-                        <li><a href="/views/productos.html?categoria=1" class="block text-lg text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular py-2">Ropa de Ciclismo</a></li>
-                        <li><a href="/views/productos.html?categoria=2" class="block text-lg text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular py-2">Partes</a></li>
-                        <li><a href="/views/productos.html?categoria=3" class="block text-lg text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular py-2">Bicicletas</a></li>
-                        <li><a href="/views/carrito.html" class="block text-lg text-black font-medium hover:text-gray-900 special-gothic-expanded-one-regular py-2 flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                            </svg>
-                            Mi Carrito
-                        </a></li>
-                        <!-- La sección de cuenta se cargará dinámicamente aquí -->
-                    </ul>
+                <!-- Menú de usuario -->
+                <div class="relative group" id="menu-usuario">
+                    <button class="flex items-center space-x-2 text-black font-medium special-gothic-expanded-one-600 py-2">
+                        <span id="nombre-usuario-nav">Mi Cuenta</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50 hidden group-hover:block">
+                        <div class="py-2">
+                            <a href="/perfil" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Perfil</a>
+                            <a href="/carrito" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Carrito</a>
+                            <div class="border-t border-gray-200 mt-2 pt-2">
+                                <button id="btn-logout" class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">Cerrar Sesión</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
+
 
     <!-- HERO SECTION -->
         <section class="relative bg-gradient-to-br from-gray-900 to-black text-white overflow-hidden">

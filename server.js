@@ -4,8 +4,8 @@ const path = require('path');
 
 const productoRoutes = require('./routes/productoRoutes');
 const carritoRoutes = require('./routes/carritoRoutes');
-// Agrega esta línea en las importaciones
 const adminRoutes = require('./routes/adminRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const port = 3000;
@@ -25,17 +25,21 @@ app.use((req, res, next) => {
 app.use('/api/productos', productoRoutes);
 app.use('/api/carrito', carritoRoutes);
 app.use('/api/admin', adminRoutes);
-
+app.use('/api/auth', authRoutes);
 
 // Servir archivos estáticos
 app.use('/js', express.static(path.join(__dirname, 'public/js')));
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/views', express.static(path.join(__dirname, 'views')));
 
-// Rutas de páginas
+// ============= RUTAS DE PÁGINAS CORREGIDAS =============
+
+// Página principal
 app.get(['/', '/index.html'], (req, res) => {
     res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
+// Productos
 app.get('/productos.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/productos.html'));
 });
@@ -44,32 +48,43 @@ app.get('/producto.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'views/producto.html'));
 });
 
-app.get('/carrito', (req, res) => {
+// Carrito
+app.get(['/carrito', '/carrito.html'], (req, res) => {
     res.sendFile(path.join(__dirname, 'views/carrito.html'));
 });
 
-app.get('/carrito.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'views/carrito.html'));
+// Checkout
+app.get(['/checkout', '/checkout.html'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/checkout.html'));
 });
 
+// Confirmación
+app.get(['/confirmacion', '/confirmacion.html'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/confirmacion.html'));
+});
 
-// Agrega esta línea en las importaciones
-const authRoutes = require('./routes/authRoutes');
-
-// Agrega esta línea en "Rutas de la API"
-app.use('/api/auth', authRoutes);
-
-// Agrega estas rutas en "Rutas de páginas"
-app.get('/login', (req, res) => {
+// ============= RUTAS DE AUTENTICACIÓN =============
+app.get(['/login', '/login.html'], (req, res) => {
     res.sendFile(path.join(__dirname, 'views/login.html'));
 });
 
-app.get('/register', (req, res) => {
+app.get(['/register', '/register.html'], (req, res) => {
     res.sendFile(path.join(__dirname, 'views/register.html'));
+});
+
+// ============= RUTA DE PERFIL (FALTABA) =============
+app.get(['/perfil', '/perfil.html'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/perfil.html'));
+});
+
+// ============= RUTA DE ADMIN (FALTABA) =============
+app.get(['/admin', '/admin.html'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/admin.html'));
 });
 
 // Manejo de errores
 app.use((req, res) => {
+    console.log('❌ Ruta no encontrada:', req.url);
     res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
@@ -80,6 +95,7 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
     console.log(`🚀 Servidor en http://localhost:${port}`);
+    console.log(`📁 Sirviendo archivos desde: ${__dirname}`);
 });
 
 module.exports = app;

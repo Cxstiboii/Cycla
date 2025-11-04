@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Producto = require('../src/models/Producto');
 const jwt = require('jsonwebtoken');
+
+// ============= IMPORTAR LA BASE DE DATOS (FALTABA) =============
+const db = require('../src/config/database');
 
 const JWT_SECRET = 'tu_clave_secreta_jwt_cambia_esto_en_produccion';
 
@@ -20,15 +22,29 @@ const verificarToken = (req, res, next) => {
 
         req.usuarioId = decoded.usuarioId;
         req.usuarioEmail = decoded.email;
+        req.esAdmin = decoded.esAdmin;  // Agregar flag de admin
         next();
     });
 };
 
-// Middleware para verificar si es admin (email @gmail.com)
+// ============= VERIFICAR ADMIN MEJORADO =============
 const verificarAdmin = (req, res, next) => {
-    if (!req.usuarioEmail || !req.usuarioEmail.endsWith('@gmail.com')) {
-        return res.status(403).json({ error: 'Acceso denegado. Se requiere cuenta de administrador (@gmail.com).' });
+    console.log('🔐 Verificando permisos de admin:', {
+        usuarioId: req.usuarioId,
+        email: req.usuarioEmail,
+        esAdmin: req.esAdmin
+    });
+
+    // Verificar si el usuario es admin (viene del token)
+    if (!req.esAdmin) {
+        console.log('❌ Acceso denegado: Usuario no es administrador');
+        return res.status(403).json({
+            error: 'Acceso denegado. Se requiere cuenta de administrador.',
+            esAdmin: false
+        });
     }
+
+    console.log('✅ Acceso de admin concedido');
     next();
 };
 
