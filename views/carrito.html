@@ -46,6 +46,7 @@
                     <div class="py-2">
                         <a href="/perfil" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Perfil</a>
                         <a href="/carrito" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Carrito</a>
+                        <a href="/admin" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Admin</a>
                         <div class="border-t border-gray-200 mt-2 pt-2">
                             <button id="btn-logout" class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">Cerrar Sesión</button>
                         </div>
@@ -55,6 +56,7 @@
         </div>
     </div>
 </nav>
+
 <!-- BREADCRUMB -->
 <nav class="bg-white border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -93,15 +95,15 @@
                 <div id="resumen-pedido" class="space-y-3 mb-6">
                     <div class="flex justify-between">
                         <span class="text-gray-600">Subtotal:</span>
-                        <span id="subtotal" class="font-semibold">$0</span>
+                        <span id="subtotal" class="font-semibold"></span>
                     </div>
                     <div class="flex justify-between">
                         <span class="text-gray-600">Envío:</span>
-                        <span id="envio" class="font-semibold">$0</span>
+                        <span id="envio" class="font-semibold"></span>
                     </div>
                     <div class="flex justify-between text-lg font-bold border-t pt-3">
                         <span>Total:</span>
-                        <span id="total" class="text-green-600">$0</span>
+                        <span id="total" class="text-green-600"></span>
                     </div>
                 </div>
 
@@ -129,8 +131,9 @@
 </footer>
 
 <!-- Cargar JavaScripts -->
-<script src="/js/AuthManager.js"></script>
-<script src="/js/CarritoManager.js"></script>
-<script src="/js/CarritoPage.js"></script>
+<script src="/public/js/AuthManager.js"></script>
+<script src="/public/js/CarritoManager.js"></script>
+<script src="/public/js/CarritoPage.js"></script>
+<script src="/public/js/CheckoutPage.js"></script>
 </body>
 </html>

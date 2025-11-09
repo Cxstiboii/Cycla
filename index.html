@@ -13,38 +13,39 @@
 
     <!-- NAVBAR (igual que en otras páginas) -->
     <nav class="sticky top-0 z-50 bg-white shadow-md bg-white/20 shadow-lg ring-1 ring-black/2">
-        <div class="hidden lg:flex items-center justify-between px-30 py-2">
-            <div class="flex-shrink-0">
-                <a href="/">
-                    <img src="/assets/Cycla_Logo.svg" alt="cycla" class="w-10 h-auto">
-                </a>
-            </div>
-            <div class="flex items-center justify-between gap-8">
-                <a href="/views/productos.html?categoria=1" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Ropa de Ciclismo</a>
-                <a href="/views/productos.html?categoria=2" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Partes</a>
-                <a href="/views/productos.html?categoria=3" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Bicicletas</a>
+    <div class="hidden lg:flex items-center justify-between px-30 py-2">
+        <div class="flex-shrink-0">
+            <a href="/">
+                <img src="/assets/Cycla_Logo.svg" alt="cycla" class="w-10 h-auto">
+            </a>
+        </div>
+        <div class="flex items-center justify-between gap-8">
+            <a href="/productos.html?categoria=1" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Ropa de Ciclismo</a>
+            <a href="/productos.html?categoria=2" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Partes</a>
+            <a href="/productos.html?categoria=3" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Bicicletas</a>
 
-                <!-- Menú de usuario -->
-                <div class="relative group" id="menu-usuario">
-                    <button class="flex items-center space-x-2 text-black font-medium special-gothic-expanded-one-600 py-2">
-                        <span id="nombre-usuario-nav">Mi Cuenta</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </button>
-                    <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50 hidden group-hover:block">
-                        <div class="py-2">
-                            <a href="/perfil" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Perfil</a>
-                            <a href="/carrito" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Carrito</a>
-                            <div class="border-t border-gray-200 mt-2 pt-2">
-                                <button id="btn-logout" class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">Cerrar Sesión</button>
-                            </div>
+            <!-- Menú de usuario -->
+            <div class="relative group" id="menu-usuario">
+                <button class="flex items-center space-x-2 text-black font-medium special-gothic-expanded-one-600 py-2">
+                    <span id="nombre-usuario-nav">Mi Cuenta</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                    </svg>
+                </button>
+                <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-200 z-50 hidden group-hover:block">
+                    <div class="py-2">
+                        <a href="/perfil" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Perfil</a>
+                        <a href="/carrito" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Carrito</a>
+                        <a href="/admin" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Admin</a>
+                        <div class="border-t border-gray-200 mt-2 pt-2">
+                            <button id="btn-logout" class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">Cerrar Sesión</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
 
     <!-- HERO SECTION -->
@@ -92,18 +93,6 @@
                                     <div class="text-sm text-gray-400">Clientes</div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- CTA Buttons -->
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                            <a href="/productos"
-                               class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25 special-gothic-expanded-one-600">
-                                Explorar Productos
-                            </a>
-                            <a href="/ofertas"
-                               class="border-2 border-white/20 hover:border-cyan-400 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white/5 special-gothic-expanded-one-600">
-                                Ver Ofertas
-                            </a>
                         </div>
 
                         <!-- Trust Badges -->
@@ -264,7 +253,6 @@
             </div>
         </footer>
 
-    </body>
 
     <script
         src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4">
@@ -290,5 +278,6 @@
     <script src="/js/ProductoRenderer.js"></script>
     <script src="/js/MultiCategoriaRenderer.js"></script>
     <script src="/js/app.js"></script>
-
+    <script src="/js/AuthManager.js"></script>
+    </body>
     </html>

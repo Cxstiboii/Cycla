@@ -60,7 +60,7 @@ class CheckoutPage {
         return `
             <div class="flex items-center justify-between py-3 border-b">
                 <div class="flex items-center space-x-3">
-                    <img src="${item.imagen || '/assets/placeholder.jpg'}" 
+                    <img src="${item.imagen || ''}" 
                          alt="${item.nombre}" 
                          class="w-12 h-12 object-cover rounded">
                     <div>

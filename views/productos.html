@@ -30,9 +30,9 @@
             </a>
         </div>
         <div class="flex items-center justify-between gap-8">
-            <a href="/views/productos.html?categoria=1" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Ropa de Ciclismo</a>
-            <a href="/views/productos.html?categoria=2" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Partes</a>
-            <a href="/views/productos.html?categoria=3" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Bicicletas</a>
+            <a href="/productos.html?categoria=1" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Ropa de Ciclismo</a>
+            <a href="/productos.html?categoria=2" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Partes</a>
+            <a href="/productos.html?categoria=3" class="text-black font-medium special-gothic-expanded-one-600 relative inline-block py-2 transition-all duration-300 hover:text-shadow-lg after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-black after:transition-all after:duration-300 hover:after:w-full">Bicicletas</a>
 
             <!-- Menú de usuario -->
             <div class="relative group" id="menu-usuario">
@@ -46,6 +46,7 @@
                     <div class="py-2">
                         <a href="/perfil" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Perfil</a>
                         <a href="/carrito" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Mi Carrito</a>
+                        <a href="/admin" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Admin</a>
                         <div class="border-t border-gray-200 mt-2 pt-2">
                             <button id="btn-logout" class="block w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100">Cerrar Sesión</button>
                         </div>
@@ -54,7 +55,7 @@
             </div>
         </div>
     </div>
-</nav>
+</nav>>
 
 <nav class="bg-white border-b border-gray-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -63,7 +64,7 @@
             <span>›</span>
             <a href="#" id="breadcrumb-categoria" class="hover:text-gray-900">Categoría</a>
             <span>›</span>
-            <span class="text-gray-900 font-semibold" id="breadcrumb-producto">o</span>
+            <span class="text-gray-900 font-semibold" id="breadcrumb-producto"></span>
         </div>
     </div>
 </nav>
@@ -197,11 +198,12 @@ document.addEventListener('DOMContentLoaded', function() {
 </footer>
 
 <!-- Cargar JavaScripts -->
-<script src="/js/AuthManager.js"></script>
-<script src="/js/ProductoRenderer.js"></script>
-<script src="/js/CarritoManager.js"></script>
-<script src="/js/app.js"></script>
-<script src="/js/ProductosPage.js"></script>
-<script src="/js/NavbarManager.js"></script>
+<script src="/public/js/AuthManager.js"></script>
+<script src="/public/js/ProductoRenderer.js"></script>
+<script src="/public/js/CarritoManager.js"></script>
+<script src="/public/js/app.js"></script>
+<script src="/public/js/ProductosPage.js"></script>
+<script src="/public/js/NavbarManager.js"></script>
+<script src="/public/js/CheckoutPage.js"></script>
 </body>
 </html>
