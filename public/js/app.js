@@ -275,7 +275,7 @@ const app = {
             return;
         }
 
-        await this.comprarProducto(productoId, productoNombre, parseFloat(productoPrecio || 0));
+        await this.comprarProducto(productoId, productoNombre, Number.parseFloat(productoPrecio || 0));
     },
 
     async comprarProducto(productoId, productoNombre, productoPrecio) {

@@ -50,8 +50,8 @@ const verificarAdmin = (req, res, next) => {
 
 // Obtener todos los productos (con paginación)
 router.get('/productos', verificarToken, verificarAdmin, (req, res) => {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const page = Number.parseInt(req.query.page, 10) || 1;
+    const limit = Number.parseInt(req.query.limit, 10) || 10;
     const offset = (page - 1) * limit;
 
     const query = `
@@ -142,10 +142,10 @@ router.post('/productos', verificarToken, verificarAdmin, (req, res) => {
     db.query(query, [
         nombre_producto,
         descripcion || '',
-        parseFloat(precio_unitario),
-        parseInt(cantidad) || 0,
+        Number.parseFloat(precio_unitario),
+        Number.parseInt(cantidad, 10) || 0,
         imagen_url || '',
-        parseInt(fk_id_tipo_Producto)
+        Number.parseInt(fk_id_tipo_Producto, 10)
     ], (err, result) => {
         if (err) {
             console.error('❌ Error creando producto:', err);
@@ -158,10 +158,10 @@ router.post('/productos', verificarToken, verificarAdmin, (req, res) => {
             id: result.insertId,
             nombre_producto,
             descripcion: descripcion || '',
-            precio_unitario: parseFloat(precio_unitario),
-            cantidad: parseInt(cantidad) || 0,
+            precio_unitario: Number.parseFloat(precio_unitario),
+            cantidad: Number.parseInt(cantidad, 10) || 0,
             imagen_url: imagen_url || '',
-            fk_id_tipo_Producto: parseInt(fk_id_tipo_Producto)
+            fk_id_tipo_Producto: Number.parseInt(fk_id_tipo_Producto, 10)
         };
 
         res.status(201).json({
@@ -194,10 +194,10 @@ router.put('/productos/:id', verificarToken, verificarAdmin, (req, res) => {
     db.query(query, [
         nombre_producto,
         descripcion,
-        parseFloat(precio_unitario),
-        parseInt(cantidad),
+        Number.parseFloat(precio_unitario),
+        Number.parseInt(cantidad, 10),
         imagen_url,
-        parseInt(fk_id_tipo_Producto),
+        Number.parseInt(fk_id_tipo_Producto, 10),
         productoId
     ], (err, result) => {
         if (err) {
@@ -259,33 +259,26 @@ router.get('/categorias', verificarToken, verificarAdmin, (req, res) => {
 
 // Estadísticas del dashboard
 router.get('/estadisticas', verificarToken, verificarAdmin, (req, res) => {
-    const queries = {
-        totalProductos: 'SELECT COUNT(*) as total FROM productos',
-        totalCategorias: 'SELECT COUNT(*) as total FROM tipo_producto',
-        productosBajoStock: 'SELECT COUNT(*) as total FROM productos WHERE cantidad < 10',
-        valorTotalInventario: 'SELECT SUM(precio_unitario * cantidad) as total FROM productos'
-    };
+    const query = `
+        SELECT 
+            (SELECT COUNT(*) FROM productos) as totalProductos,
+            (SELECT COUNT(*) FROM tipo_producto) as totalCategorias,
+            (SELECT COUNT(*) FROM productos WHERE cantidad < 10) as productosBajoStock,
+            (SELECT SUM(precio_unitario * cantidad) FROM productos) as valorTotalInventario
+    `;
 
-    db.query(queries.totalProductos, (err, result1) => {
-        if (err) return res.status(500).json({ error: 'Error del servidor' });
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('❌ Error obteniendo estadísticas:', err);
+            return res.status(500).json({ error: 'Error del servidor' });
+        }
 
-        db.query(queries.totalCategorias, (err, result2) => {
-            if (err) return res.status(500).json({ error: 'Error del servidor' });
-
-            db.query(queries.productosBajoStock, (err, result3) => {
-                if (err) return res.status(500).json({ error: 'Error del servidor' });
-
-                db.query(queries.valorTotalInventario, (err, result4) => {
-                    if (err) return res.status(500).json({ error: 'Error del servidor' });
-
-                    res.json({
-                        totalProductos: result1[0].total,
-                        totalCategorias: result2[0].total,
-                        productosBajoStock: result3[0].total,
-                        valorTotalInventario: result4[0].total || 0
-                    });
-                });
-            });
+        const stats = results[0];
+        res.json({
+            totalProductos: stats.totalProductos,
+            totalCategorias: stats.totalCategorias,
+            productosBajoStock: stats.productosBajoStock,
+            valorTotalInventario: stats.valorTotalInventario || 0
         });
     });
 });

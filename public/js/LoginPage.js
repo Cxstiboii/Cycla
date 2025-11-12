@@ -1,6 +1,6 @@
 class LoginPage {
     constructor() {
-        this.authManager = window.authManager;
+        this.authManager = globalThis.authManager;
         this.form = document.getElementById('form-login');
         this.init();
     }
@@ -18,7 +18,7 @@ class LoginPage {
     }
 
     verificarRedireccion() {
-        const urlParams = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(globalThis.location.search);
         const redirect = urlParams.get('redirect');
 
         if (redirect) {
@@ -32,11 +32,11 @@ class LoginPage {
 
     configurarEventosInput() {
         const inputs = document.querySelectorAll('#form-login input');
-        inputs.forEach(input => {
+        for (const input of inputs) {
             input.addEventListener('input', () => {
                 this.ocultarMensajes();
             });
-        });
+        }
     }
 
     async handleLogin(e) {
@@ -75,7 +75,7 @@ class LoginPage {
                 this.mostrarExito('¡Login exitoso! Redirigiendo...');
 
                 // Obtener URL de redirección
-                const urlParams = new URLSearchParams(window.location.search);
+                const urlParams = new URLSearchParams(globalThis.location.search);
                 const redirectParam = urlParams.get('redirect');
                 const redirectStorage = localStorage.getItem('redirectAfterLogin');
 
@@ -93,7 +93,7 @@ class LoginPage {
 
                 // Esperar un momento para mostrar el mensaje
                 setTimeout(() => {
-                    window.location.href = redirectUrl;
+                    globalThis.location.href = redirectUrl;
                 }, 1500);
             } else {
                 this.mostrarError(result.error || 'Error en el login. Verifica tus credenciales.');
@@ -178,14 +178,15 @@ class LoginPage {
             localStorage.setItem('redirectAfterLogin', redirectUrl);
         }
 
-        window.location.href = loginUrl;
+        globalThis.location.href = loginUrl;
     }
 }
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-    new LoginPage();
+    const loginPage = new LoginPage();
+    // La instancia se usa internamente, no es necesario asignarla a una variable si no se usa externamente
 });
 
 // Hacer el método estático disponible globalmente
-window.LoginPage = LoginPage;
+globalThis.LoginPage = LoginPage;

@@ -1,6 +1,6 @@
 class CheckoutPage {
     constructor() {
-        this.authManager = window.authManager;
+        this.authManager = globalThis.authManager;
         this.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     }
 
@@ -11,7 +11,7 @@ class CheckoutPage {
         if (!this.authManager.estaAutenticado()) {
             this.mostrarError('Debes iniciar sesión para acceder al checkout');
             setTimeout(() => {
-                window.location.href = '/login.html?redirect=/checkout.html';
+                globalThis.location.href = '/login.html?redirect=/checkout.html';
             }, 2000);
             return;
         }
@@ -20,7 +20,7 @@ class CheckoutPage {
         if (this.carrito.length === 0) {
             this.mostrarError('Tu carrito está vacío');
             setTimeout(() => {
-                window.location.href = '/carrito.html';
+                globalThis.location.href = '/carrito.html';
             }, 2000);
             return;
         }
@@ -121,7 +121,7 @@ class CheckoutPage {
 
             // Redirigir a confirmación
             setTimeout(() => {
-                window.location.href = '/confirmacion.html';
+                globalThis.location.href = '/confirmacion.html';
             }, 2000);
 
         } catch (error) {
@@ -210,7 +210,7 @@ class CheckoutPage {
 
     formatearPrecio(precio) {
         if (!precio) return '0';
-        return parseFloat(precio).toLocaleString('es-CO');
+        return Number.parseFloat(precio).toLocaleString('es-CO');
     }
 }
 

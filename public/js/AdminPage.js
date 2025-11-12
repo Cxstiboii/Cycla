@@ -1,21 +1,21 @@
 class AdminPage {
-    constructor() {
-        this.apiBase = 'http://localhost:3000/api';
-        this.currentSection = 'dashboard';
-    }
+    // CORRECCIÓN: Usar class field declarations
+    apiBase = 'http://localhost:3000/api';
+    currentSection = 'dashboard';
 
     async init() {
         console.log('🔄 Inicializando página de administración...');
 
         try {
-            // Verificar si el usuario es administrador
-            if (!window.authManager.estaAutenticado()) {
+            // CORRECCIÓN: Usar globalThis en lugar de window
+            if (!globalThis.authManager?.estaAutenticado()) {
                 this.mostrarError('Debes iniciar sesión para acceder al panel de administración');
                 return;
             }
 
-            const usuario = window.authManager.getUsuario();
-            if (!usuario.esAdmin) {
+            // CORRECCIÓN: Usar globalThis en lugar de window
+            const usuario = globalThis.authManager.getUsuario();
+            if (!usuario?.esAdmin) {
                 this.mostrarError('No tienes permisos para acceder al panel de administración');
                 return;
             }
@@ -34,14 +34,15 @@ class AdminPage {
     }
 
     configurarEventos() {
-        // Navegación entre secciones
-        document.querySelectorAll('.admin-nav').forEach(nav => {
+        // CORRECCIÓN: Usar for...of en lugar de forEach
+        const navElements = document.querySelectorAll('.admin-nav');
+        for (const nav of navElements) {
             nav.addEventListener('click', (e) => {
                 e.preventDefault();
                 const section = e.target.dataset.section;
                 this.cambiarSeccion(section);
             });
-        });
+        }
 
         // Botón nuevo producto
         const btnNuevoProducto = document.getElementById('btn-nuevo-producto');
@@ -63,10 +64,11 @@ class AdminPage {
     async cambiarSeccion(section) {
         this.currentSection = section;
 
-        // Ocultar todas las secciones
-        document.querySelectorAll('.admin-section').forEach(sec => {
+        // CORRECCIÓN: Usar for...of en lugar de forEach
+        const sectionElements = document.querySelectorAll('.admin-section');
+        for (const sec of sectionElements) {
             sec.classList.add('hidden');
-        });
+        }
 
         // Mostrar sección actual
         const sectionElement = document.getElementById(`${section}-section`);
@@ -224,6 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminPage = new AdminPage();
     adminPage.init();
 
-    // Hacer disponible globalmente para debugging
-    window.adminPage = adminPage;
+    // CORRECCIÓN: Usar globalThis en lugar de window
+    globalThis.adminPage = adminPage;
 });

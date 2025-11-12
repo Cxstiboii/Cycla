@@ -24,14 +24,14 @@ class CarritoManager {
 
             if (productoExistente) {
                 // Si ya existe, incrementar la cantidad
-                productoExistente.cantidad += parseInt(cantidad);
+                productoExistente.cantidad += Number.parseInt(cantidad);
             } else {
                 // Si no existe, agregar nuevo producto
                 const nuevoProducto = {
                     id: productoId,
                     nombre: productoData?.nombre || `Producto ${productoId}`,
                     precio: productoData?.precio || 0,
-                    cantidad: parseInt(cantidad),
+                    cantidad: Number.parseInt(cantidad),
                     imagen: productoData?.imagen || '/assets/placeholder.jpg'
                 };
                 this.carrito.push(nuevoProducto);
@@ -93,7 +93,7 @@ class CarritoManager {
             const producto = this.carrito.find(item => item.id === productoId);
 
             if (producto) {
-                producto.cantidad = parseInt(cantidad);
+                producto.cantidad = Number.parseInt(cantidad);
 
                 // Si la cantidad es 0, eliminar el producto
                 if (producto.cantidad <= 0) {
@@ -158,7 +158,7 @@ class CarritoManager {
 
     formatearPrecio(precio) {
         if (!precio && precio !== 0) return '$0';
-        return `$${parseFloat(precio).toLocaleString('es-CO')}`;
+        return `$${Number.parseFloat(precio).toLocaleString('es-CO')}`;
     }
 
     getTotalItems() {
@@ -210,12 +210,12 @@ class CarritoManager {
 }
 
 // Hacer disponible globalmente
-window.CarritoManager = CarritoManager;
+globalThis.CarritoManager = CarritoManager;
 
 // Inicializar automáticamente cuando se carga la página
 document.addEventListener('DOMContentLoaded', function() {
-    if (!window.carritoManager) {
-        window.carritoManager = new CarritoManager();
-        window.carritoManager.inicializar();
+    if (!globalThis.carritoManager) {
+        globalThis.carritoManager = new CarritoManager();
+        globalThis.carritoManager.inicializar();
     }
 });

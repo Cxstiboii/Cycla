@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const structure = [
     'src/controllers',
@@ -16,14 +16,17 @@ const structure = [
 
 console.log('🏗 Creando estructura de carpetas...');
 
-structure.forEach(dir => {
+// Usar for...of en lugar de forEach
+for (const dir of structure) {
     const dirPath = path.join(__dirname, dir);
-    if (!fs.existsSync(dirPath)) {
+    
+    // Condición positiva en lugar de negada
+    if (fs.existsSync(dirPath)) {
+        console.log(`📁 Ya existe: ${dir}`);
+    } else {
         fs.mkdirSync(dirPath, { recursive: true });
         console.log(`✅ Creando: ${dir}`);
-    } else {
-        console.log(`📁 Ya existe: ${dir}`);
     }
-});
+}
 
 console.log('🎉 Estructura creada!');

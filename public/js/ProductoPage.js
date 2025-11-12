@@ -43,7 +43,7 @@ class ProductoPage {
 
     obtenerProductoIdDeURL() {
         const urlParams = new URLSearchParams(window.location.search);
-        this.productoId = parseInt(urlParams.get('id'));
+        this.productoId = Number.parseInt(urlParams.get('id'), 10);
 
         console.log('🔍 ID de producto obtenido:', this.productoId);
     }
@@ -339,11 +339,11 @@ class ProductoPage {
 
         if (cantidadInput) {
             cantidadInput.addEventListener('change', (e) => {
-                let valor = parseInt(e.target.value);
-                const max = parseInt(e.target.max);
-                const min = parseInt(e.target.min);
+                let valor = Number.parseInt(e.target.value, 10);
+                const max = Number.parseInt(e.target.max, 10);
+                const min = Number.parseInt(e.target.min, 10);
 
-                if (isNaN(valor) || valor < min) valor = min;
+                if (Number.isNaN(valor) || valor < min) valor = min;
                 if (valor > max) valor = max;
 
                 e.target.value = valor;
@@ -352,8 +352,8 @@ class ProductoPage {
 
             cantidadInput.addEventListener('input', (e) => {
                 // Validar en tiempo real
-                let valor = parseInt(e.target.value);
-                const max = parseInt(e.target.max);
+                let valor = Number.parseInt(e.target.value, 10);
+                const max = Number.parseInt(e.target.max, 10);
 
                 if (valor > max) {
                     e.target.value = max;
@@ -366,8 +366,8 @@ class ProductoPage {
         const cantidadInput = document.getElementById('cantidad-producto');
         if (!cantidadInput) return;
 
-        let cantidad = parseInt(cantidadInput.value);
-        const max = parseInt(cantidadInput.max);
+        let cantidad = Number.parseInt(cantidadInput.value, 10);
+        const max = Number.parseInt(cantidadInput.max, 10);
 
         if (action === 'increment' && cantidad < max) {
             cantidad++;
@@ -386,8 +386,8 @@ class ProductoPage {
 
         if (!cantidadInput || !btnDecremento || !btnIncremento) return;
 
-        const cantidad = parseInt(cantidadInput.value);
-        const max = parseInt(cantidadInput.max);
+        const cantidad = Number.parseInt(cantidadInput.value, 10);
+        const max = Number.parseInt(cantidadInput.max, 10);
 
         btnDecremento.disabled = cantidad <= 1;
         btnIncremento.disabled = cantidad >= max;
@@ -403,7 +403,7 @@ class ProductoPage {
                 if (this.producto.cantidad === 0) return;
 
                 const cantidadInput = document.getElementById('cantidad-producto');
-                const cantidad = cantidadInput ? parseInt(cantidadInput.value) : 1;
+                const cantidad = cantidadInput ? Number.parseInt(cantidadInput.value, 10) : 1;
 
                 await this.agregarAlCarrito(cantidad);
             });
@@ -414,14 +414,17 @@ class ProductoPage {
         try {
             console.log(`🛒 Agregando producto ${this.productoId} al carrito (cantidad: ${cantidad})`);
 
-            const result = await this.carritoManager.agregarProducto(this.productoId, cantidad);
+            // Asegurar que siempre trabajamos con una Promise
+            const result = await Promise.resolve(this.carritoManager.agregarProducto(this.productoId, cantidad));
 
-            if (result.success) {
+            if (result && result.success) {
                 this.mostrarNotificacion(`✅ "${this.producto.nombre_producto}" agregado al carrito`, 'success');
 
                 // Animación de confirmación
                 const btn = document.getElementById('btn-agregar-carrito');
                 if (btn) {
+                    const originalHTML = btn.innerHTML;
+                    
                     btn.innerHTML = '<span>✅</span><span>Agregado</span>';
                     btn.disabled = true;
                     btn.classList.remove('bg-black', 'hover:bg-gray-800');
@@ -435,7 +438,8 @@ class ProductoPage {
                     }, 2000);
                 }
             } else {
-                this.mostrarNotificacion(`❌ Error: ${result.error?.details || 'No se pudo agregar al carrito'}`, 'error');
+                const errorMsg = result?.error?.details || result?.error || 'No se pudo agregar al carrito';
+                this.mostrarNotificacion(`❌ Error: ${errorMsg}`, 'error');
             }
         } catch (error) {
             console.error('❌ Error agregando al carrito:', error);
@@ -492,7 +496,7 @@ class ProductoPage {
 
     formatearPrecio(precio) {
         if (!precio) return '$0';
-        return `$${parseFloat(precio).toLocaleString('es-CO')}`;
+        return `$${Number.parseFloat(precio).toLocaleString('es-CO')}`;
     }
 }
 

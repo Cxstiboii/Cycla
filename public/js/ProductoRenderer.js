@@ -113,65 +113,65 @@ class ProductoRenderer {
     }
 
     crearCardProducto(producto) {
-        const esMasVendido = producto.cantidad > 50;
-        const esStockBajo = producto.cantidad < 10;
-        const precioFormateado = this.formatearPrecio(producto.precio_unitario);
+    const esMasVendido = producto.cantidad > 50;
+    const esStockBajo = producto.cantidad < 10;
+    const precioFormateado = this.formatearPrecio(producto.precio_unitario);
 
-        return `
-            <div class="snap-start flex-shrink-0 w-72 rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 p-4 group">
-                <!-- Enlace en toda la tarjeta -->
-                <a href="/producto.html?id=${producto.id}" class="block cursor-pointer">
-                    <div class="bg-gray-100 rounded-2xl p-4 relative group-hover:bg-gray-200 transition-colors duration-300">
-                        <div class="flex justify-between items-center mb-2">
-                            ${esMasVendido ?
+    return `
+        <div class="snap-start flex-shrink-0 w-72 rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 p-4 group">
+            <!-- Enlace en toda la tarjeta -->
+            <a href="/producto.html?id=${producto.id}" class="block cursor-pointer">
+                <div class="bg-gray-100 rounded-2xl p-4 relative group-hover:bg-gray-200 transition-colors duration-300">
+                    <div class="flex justify-between items-center mb-2">
+                        ${esMasVendido ?
             '<span class="bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded-full font-semibold">🔥 Más Vendido</span>' :
             '<span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full font-semibold">🆕 Nuevo</span>'
         }
-                            <button class="text-gray-400 hover:text-red-500 transition favorito-btn" 
-                                    data-producto-id="${producto.id}"
-                                    title="Añadir a favoritos"
-                                    onclick="event.preventDefault(); event.stopPropagation();">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                            </button>
-                        </div>
-                        
-                        ${esStockBajo ?
+                        <button class="text-gray-400 hover:text-red-500 transition favorito-btn" 
+                                data-producto-id="${producto.id}"
+                                title="Añadir a favoritos"
+                                onclick="event.preventDefault(); event.stopPropagation();">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    ${esStockBajo ?
             '<span class="absolute top-2 right-2 bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-semibold">⚠️ Últimas unidades</span>' :
             ''
         }
-                        
-                        <div class="mt-4 flex justify-center items-center h-48">
-                            ${this.obtenerImagenProducto(producto)}
-                        </div>
-                    </div>
                     
-                    <div class="mt-4 space-y-2">
-                        <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular leading-tight min-h-[3rem] group-hover:text-blue-600 transition-colors">
-                            ${producto.nombre_producto}
-                        </h3>
-                        <p class="text-2xl font-bold text-gray-900">${precioFormateado}</p>
-                        
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-600 ${esStockBajo ? 'text-red-500 font-semibold' : ''}">
-                                ${esStockBajo ? 'Solo ' : ''}${producto.cantidad} unidades
-                            </span>
-                            <span class="text-gray-400">Código: ${producto.id}</span>
-                        </div>
+                    <div class="mt-4 flex justify-center items-center h-48">
+                        ${this.obtenerImagenProducto(producto)}
                     </div>
-                </a>
+                </div>
                 
-                <button class="w-full mt-4 bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition font-semibold comprar-btn" 
-                        data-producto-id="${producto.id}" 
-                        data-producto-nombre="${producto.nombre_producto}"
-                        data-producto-precio="${producto.precio_unitario}"
-                        onclick="event.stopPropagation();">
-                    🛒 Añadir al Carrito
-                </button>
-            </div>
-        `;
-    }
+                <div class="mt-4 space-y-2">
+                    <h3 class="text-gray-800 font-bold text-lg special-gothic-expanded-one-regular leading-tight min-h-[3rem] group-hover:text-blue-600 transition-colors">
+                        ${producto.nombre_producto}
+                    </h3>
+                    <p class="text-2xl font-bold text-gray-900">${precioFormateado}</p>
+                    
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-600 ${esStockBajo ? 'text-red-500 font-semibold' : ''}">
+                            ${esStockBajo ? 'Solo ' : ''}${producto.cantidad} unidades
+                        </span>
+                        <span class="text-gray-400">Código: ${producto.id}</span>
+                    </div>
+                </div>
+            </a>
+            
+            <button class="w-full mt-4 bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition font-semibold comprar-btn" 
+                    data-producto-id="${producto.id}" 
+                    data-producto-nombre="${producto.nombre_producto}"
+                    data-producto-precio="${producto.precio_unitario}"
+                    onclick="event.stopPropagation();">
+                🛒 Añadir al Carrito
+            </button>
+        </div>
+    `;
+}
 
     obtenerImagenProducto(producto) {
         if (producto.imagen_url) {
@@ -198,41 +198,43 @@ class ProductoRenderer {
     }
 
     inicializarEventosProductos(containerId) {
-        const container = document.getElementById(containerId);
-        if (!container) return;
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-        // Event listeners para botones de compra
-        container.querySelectorAll('.comprar-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+    // Event listeners para botones de compra
+    container.querySelectorAll('.comprar-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
 
-                const productoId = btn.getAttribute('data-producto-id');
-                const productoNombre = btn.getAttribute('data-producto-nombre');
-                const productoPrecio = parseFloat(btn.getAttribute('data-producto-precio'));
+            // CORRECCIÓN: Usar dataset en lugar de getAttribute
+            const productoId = btn.dataset.productoId;
+            const productoNombre = btn.dataset.productoNombre;
+            const productoPrecio = Number.parseFloat(btn.dataset.productoPrecio);
 
-                this.agregarAlCarrito({
-                    id: productoId,
-                    nombre: productoNombre,
-                    precio: productoPrecio,
-                    cantidad: 1
-                });
+            this.agregarAlCarrito({
+                id: productoId,
+                nombre: productoNombre,
+                precio: productoPrecio,
+                cantidad: 1
             });
         });
+    });
 
-        // Event listeners para botones de favoritos
-        container.querySelectorAll('.favorito-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+    // Event listeners para botones de favoritos
+    container.querySelectorAll('.favorito-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
 
-                const productoId = btn.getAttribute('data-producto-id');
-                this.agregarAFavoritos(productoId);
-            });
+            // CORRECCIÓN: Usar dataset en lugar de getAttribute
+            const productoId = btn.dataset.productoId;
+            this.agregarAFavoritos(productoId);
         });
+    });
 
-        console.log(`🎯 Eventos de productos inicializados para #${containerId}`);
-    }
+    console.log(`🎯 Eventos de productos inicializados para #${containerId}`);
+}
 
     agregarAlCarrito(producto) {
         // Verificar si el producto ya está en el carrito
@@ -305,7 +307,7 @@ class ProductoRenderer {
 
     formatearPrecio(precio) {
         if (!precio) return '$0';
-        return `$${parseFloat(precio).toLocaleString('es-CO')}`;
+        return `$${Number.parseFloat(precio).toLocaleString('es-CO')}`;
     }
 
     mostrarError(containerId, mensaje = 'Error cargando productos') {

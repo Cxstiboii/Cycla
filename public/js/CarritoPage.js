@@ -1,7 +1,7 @@
 class CarritoPage {
     constructor() {
         this.carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        this.authManager = window.authManager;
+        this.authManager = globalThis.authManager;
     }
 
     init() {
@@ -162,7 +162,7 @@ class CarritoPage {
         const btnContinuar = document.getElementById('btn-continuar-comprando');
         if (btnContinuar) {
             btnContinuar.addEventListener('click', () => {
-                window.location.href = '/';
+                globalThis.location.href = '/';
             });
         }
     }
@@ -185,13 +185,13 @@ class CarritoPage {
 
             setTimeout(() => {
                 // Redirigir a login con parámetro de redirección
-                window.location.href = `/views/login.html?redirect=${encodeURIComponent(checkoutPath)}`;
+                globalThis.location.href = `/views/login.html?redirect=${encodeURIComponent(checkoutPath)}`;
             }, 1500);
             return;
         }
 
         // Si está autenticado, redirigir a checkout
-        window.location.href = '/views/checkout.html';
+        globalThis.location.href = '/views/checkout.html';
     }
 
     actualizarCantidad(productoId, action) {
@@ -291,7 +291,7 @@ class CarritoPage {
 
     formatearPrecio(precio) {
         if (!precio) return '0';
-        return parseFloat(precio).toLocaleString('es-CO');
+        return Number.parseFloat(precio).toLocaleString('es-CO');
     }
 }
 
@@ -301,12 +301,12 @@ document.addEventListener('DOMContentLoaded', () => {
     carritoPage.init();
 
     // Hacer disponible globalmente para debugging
-    window.carritoPage = carritoPage;
+    globalThis.carritoPage = carritoPage;
 });
 
 // Escuchar eventos de actualización del carrito desde otras páginas
 document.addEventListener('carritoActualizado', function() {
-    if (window.carritoPage) {
-        window.carritoPage.cargarCarrito();
+    if (globalThis.carritoPage) {
+        globalThis.carritoPage.cargarCarrito();
     }
 });

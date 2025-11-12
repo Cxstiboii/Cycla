@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
 // Ruta para productos por categoría
 router.get('/categoria/:id', (req, res) => {
     const categoriaId = req.params.id;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = Number.parseInt(req.query.limit, 10) || 10;
 
     Producto.getByCategoria(categoriaId, limit, (err, results) => {
         if (err) {

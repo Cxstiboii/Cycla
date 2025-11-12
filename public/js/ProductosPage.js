@@ -32,7 +32,7 @@ class ProductosPage {
 
     obtenerCategoriaDeURL() {
         const urlParams = new URLSearchParams(window.location.search);
-        this.categoriaId = parseInt(urlParams.get('categoria')) || 1;
+        this.categoriaId = Number.parseInt(urlParams.get('categoria'), 10) || 1;
 
         console.log('🔍 Categoría obtenida:', this.categoriaId);
     }
